@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,11 +8,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+<!-- empMenu include -->
+	<div>
+		<c:import url="/WEB-INF/view/employee/inc/empMenu.jsp"></c:import>
+	</div>
 	<h1>강사 추가</h1>
 	<div>
 		${errorMsg}
 	</div>
-	<form method="post" action="${pageContext.request.contextPath}/student/addStudent">
+	<form method="post" action="${pageContext.request.contextPath}/employee/addTeacher">
 		<table>
 			<tr>
 				<td>teacherId</td>

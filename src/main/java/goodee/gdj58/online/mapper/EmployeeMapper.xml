@@ -2,6 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goodee.gdj58.online.mapper.EmployeeMapper">
 	
+	
+	<!-- 강사 -->
+	<!-- 관리자가 강사 등록 -->
+	<insert id="insertTeacher" parameterType="goodee.gdj58.online.vo.Teacher">
+		INSERT INTO teacher (
+			teachert_id
+			, teacher_pw
+			, teacher_name
+		) VALUES (
+			#{teacherId}
+			,PASSWORD(#{teacherPw})
+			,#{teacherName}
+		)
+	</insert>
+	
 	<!-- 관리자가 강사 삭제 -->
 	<delete id="deleteTeacher" parameterType="int">
 		DELETE FROM teacher
@@ -21,8 +36,23 @@
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	
+	
+	<!-- 학생 -->
+	<!-- 관리자가 학생 등록 -->
+	<insert id="insertStudent" parameterType="goodee.gdj58.online.vo.Student">
+		INSERT INTO student (
+			student_id
+			, student_pw
+			, student_name
+		) VALUES (
+			#{studentId}
+			,PASSWORD(#{studentPw})
+			,#{studentName}
+		)
+	</insert>
+	
 	<!-- 관리자가 학생 삭제 -->
-	<delete id="deleteStudent" parameterType="int">
+	<delete id="deleteStudent" parameterType="int">  <!-- parameterType: 전달받은 파라이터 데이터 타입 지정(선택적) -->
 		DELETE FROM student
 		WHERE student_no = #{studentNo}
 	</delete>
@@ -40,7 +70,9 @@
 		ORDER BY student_no DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
-
+	
+	
+	<!-- 관리자 -->
 	<update id="updateEmployeePw" parameterType="java.util.Map">
 		UPDATE employee
 		SET emp_pw = PASSWORD(#{newPw})
@@ -50,7 +82,7 @@
 	
 	<select id="login" 
 		parameterType="goodee.gdj58.online.vo.Employee"
-		resultType="goodee.gdj58.online.vo.Employee">
+		resultType="goodee.gdj58.online.vo.Employee"> <!-- resultType : 조회 결과 값을 저장하기 위한 데이터 타입(데이터 하나에 대한 타입 지정) -->
 		
 		SELECT 
 			emp_no empNo

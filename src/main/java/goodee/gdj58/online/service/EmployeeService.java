@@ -19,10 +19,16 @@ public class EmployeeService {
 	//DI = new 연산자 역할
 	@Autowired private EmployeeMapper employeeMapper;
 	
-	//관리자가 학생 삭제
-		public int removeTeacher(int teacherNo) {
-			return employeeMapper.deleteTeacher(teacherNo);
-		}
+	//변수 타입은 mapper에서 쓴 타입과 동일해야 함
+	//관리자가 강사 등록
+	public int addTeacher(Teacher teacher) {
+		
+		return employeeMapper.insertTeacher(teacher);
+	}
+	//관리자가 강사 삭제
+	public int removeTeacher(int teacherNo) {
+		return employeeMapper.deleteTeacher(teacherNo);
+	}
 	//관리자 쪽에서 보는 강사리스트
 	public List<Teacher> getTeacherList(int currentPage, int rowPerPage) {
 		int beginRow = (currentPage-1)*rowPerPage; //0변부터 출력할 거~ rowPwePage 개수만큼 출력
@@ -32,7 +38,11 @@ public class EmployeeService {
 		return employeeMapper.selectTeacherList(paramMap);
 	}
 	
-	
+	//관리자가 학생 등록
+	public int addStudent(Student student) {
+		
+		return employeeMapper.insertStudent(student);
+	}
 	//관리자가 학생 삭제
 	public int removeStudent(int studentNo) {
 		return employeeMapper.deleteStudent(studentNo);

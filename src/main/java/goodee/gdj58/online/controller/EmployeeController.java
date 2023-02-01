@@ -113,6 +113,73 @@ public class EmployeeController {
 	}
 	
 	// 입력
+	//강사
+	@GetMapping("/employee/addTeacher")
+	public String addTeacher(HttpSession session) {
+		Employee loginEmp = (Employee)session.getAttribute("loginEmp");
+		if(loginEmp == null) { //로그인 되어 있지 않으면 로그인 폼으로 보냄
+			return "redirect:/employee/loginEmp";
+		}
+		
+		return "employee/addTeacher"; // forword
+	}
+	@PostMapping("/employee/addTeacher")
+	public String addTeacher(HttpSession session, Teacher teacher, Model model) {
+		Employee loginEmp = (Employee)session.getAttribute("loginEmp");
+		if(loginEmp == null) { //로그인 되어 있지 않으면 로그인 폼으로 보냄
+			return "redirect:/employee/loginEmp";
+		}
+		String idCheck=idService.getIdCheck(teacher.getTeacherId());
+		if(idCheck!= null) {
+			model.addAttribute("errorMsg", "중복된 아이디 입니다.");
+			System.out.println("중복된 아이디: 컨트롤러");
+			return "redirect:/employee/addTeacher";
+			//되돌아 오면 중복 된 것
+		}
+		int row = employeeService.addTeacher(teacher);
+		// row == 1 이면 입력성공
+		if(row == 0) {
+			model.addAttribute("errorMsg", "회원가입 실패!");
+			return "employee/addTeacher";
+		}
+		System.out.println("회원가입 성공: 컨트롤러");
+		
+		return "redirect:/employee/addTeacher";
+	}
+	//학생
+	@GetMapping("/employee/addStudent")
+	public String addStudent(HttpSession session) {
+		Employee loginEmp = (Employee)session.getAttribute("loginEmp");
+		if(loginEmp == null) { //로그인 되어 있지 않으면 로그인 폼으로 보냄
+			return "redirect:/employee/loginEmp";
+		}
+		
+		return "employee/addStudent"; // forword
+	}
+	@PostMapping("/employee/addStudent")
+	public String addStudent(HttpSession session, Student student, Model model) {
+		Employee loginEmp = (Employee)session.getAttribute("loginEmp");
+		if(loginEmp == null) { //로그인 되어 있지 않으면 로그인 폼으로 보냄
+			return "redirect:/employee/loginEmp";
+		}
+		String idCheck=idService.getIdCheck(student.getStudentId());
+		if(idCheck!= null) {
+			model.addAttribute("errorMsg", "중복된 아이디 입니다.");
+			System.out.println("중복된 아이디: 컨트롤러");
+			return "redirect:/employee/addStudent";
+			//되돌아 오면 중복 된 것
+		}
+		int row = employeeService.addStudent(student);
+		// row == 1 이면 입력성공
+		if(row == 0) {
+			model.addAttribute("errorMsg", "회원가입 실패!");
+			return "employee/addStudent";
+		}
+		System.out.println("회원가입 성공: 컨트롤러");
+		
+		return "redirect:/employee/addStudent";
+	}
+	//관리자
 	@GetMapping("/employee/addEmp")
 	public String addEmp(HttpSession session) {
 		Employee loginEmp = (Employee)session.getAttribute("loginEmp");
@@ -141,7 +208,7 @@ public class EmployeeController {
 		// row == 1 이면 입력성공
 		if(row == 0) {
 			model.addAttribute("errorMsg", "회원가입 실패!");
-			return "employee/loginEmp";
+			return "employee/addEmp";
 		}
 		System.out.println("회원가입 성공: 컨트롤러");
 		return "redirect:/employee/empList"; // sendRedirect , CM -> C
