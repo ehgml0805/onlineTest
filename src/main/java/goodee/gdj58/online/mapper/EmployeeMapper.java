@@ -11,24 +11,13 @@ import goodee.gdj58.online.vo.Teacher;
 
 @Mapper
 public interface EmployeeMapper {
-	
-	//관리자가 강사 등록
-	int insertTeacher(Teacher teacher);
-	//관리자가 강사 삭제
-	int deleteTeacher(int teacherNo);
-	//관리자 쪽에서 보는 강사리스트
-	List<Teacher> selectTeacherList(Map<String, Object> paramMap);
-	
-	//관리자가 학생 등록
-	int insertStudent(Student student);
-	//관리자가 학생 삭제
-	int deleteStudent(int studentNo);
-	//관리자 쪽에서 보는 학생목록
-	List<Student> selectStudentList(Map<String, Object> paramMap);
-	
+
 	int updateEmployeePw(Map<String,Object> paramMap);
 	Employee login(Employee employee);
 	int deleteEmployee(int empNo);
 	int insertEmployee(Employee employee);
+	//마지막 페이징
+	int selectCount(String searchWord);
+	//관리자 리스트
 	List<Employee> selectEmployeeList(Map<String, Object> paramMap);
 }

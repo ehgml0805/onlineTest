@@ -16,7 +16,7 @@
 	<div>
 		${errorMsg}
 	</div>
-	<form method="post" action="${pageContext.request.contextPath}/employee/addTeacher">
+	<form method="post" action="${pageContext.request.contextPath}/employee/teacher/addTeacher">
 		<table>
 			<tr>
 				<td>teacherId</td>

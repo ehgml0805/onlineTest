@@ -1,6 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goodee.gdj58.online.mapper.TeacherMapper">
+		
+	
+	<!-- 관리자가 강사 등록 -->
+	<insert id="insertTeacher" parameterType="goodee.gdj58.online.vo.Teacher">
+		INSERT INTO teacher (
+			teachert_id
+			, teacher_pw
+			, teacher_name
+		) VALUES (
+			#{teacherId}
+			,PASSWORD(#{teacherPw})
+			,#{teacherName}
+		)
+	</insert>
+	
+	<!-- 관리자가 강사 삭제 -->
+	<delete id="deleteTeacher" parameterType="int">
+		DELETE FROM teacher
+		WHERE teacher_no = #{teacherNo}
+	</delete>
+	
+	<!--페이징을 위한 총 개수 -->
+	<select id="selectCount" resultType="int">
+		SELECT COUNT(*) FROM teacher
+		<where>
+			<if test="searchWord != null || searchWord != '' ">
+				teacher_name like CONCAT('%',#{searchWord},'%')
+			</if>
+		</where>
+	</select>
+	
+	<!-- 관리자 쪽에서 보는 강사리스트 -->
+	<select id="selectTeacherList" 
+		resultType="goodee.gdj58.online.vo.Teacher"
+		parameterType="java.util.Map">
+		
+		SELECT
+			teacher_no teachertNo
+			, teacher_id teacherId
+			, teacher_name teacherName
+		FROM teacher
+		ORDER BY teacher_no DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
 	
 	<!-- 강사 로그인 -->
 	<select id="loginTeacher" 
@@ -13,22 +57,4 @@
 	
 	</select>
 	
-	<!-- 강사 회원 탈퇴 만들긴 해놨으나 관리자만 삭제 가능하게 할 거..-->
-	<delete id="deleteTeacher"
-			parameterType="int">
-		
-		DELETE FROM teacher WHERE teacher_no=#{teacherNo}
-	
-	</delete>
-	
-	<!-- 강사 회원 가입 -->
-	<insert id="insertTeacher" 
-			parameterType="goodee.gdj58.online.vo.Teacher"> <!-- parameterType: 전달받은 파라이터 데이터 타입 지정(선택적) -->
-		
-		INSERT INTO teacher ( teacher_id ,teacher_pw ,teacher_name)
-			VALUES (#{teacherId}, PASSWORD(#{teacherPw}), #{teacherName})
-	
-	</insert>
-
-
 </mapper>

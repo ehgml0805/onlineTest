@@ -20,42 +20,6 @@ public class EmployeeService {
 	@Autowired private EmployeeMapper employeeMapper;
 	
 	//변수 타입은 mapper에서 쓴 타입과 동일해야 함
-	//관리자가 강사 등록
-	public int addTeacher(Teacher teacher) {
-		
-		return employeeMapper.insertTeacher(teacher);
-	}
-	//관리자가 강사 삭제
-	public int removeTeacher(int teacherNo) {
-		return employeeMapper.deleteTeacher(teacherNo);
-	}
-	//관리자 쪽에서 보는 강사리스트
-	public List<Teacher> getTeacherList(int currentPage, int rowPerPage) {
-		int beginRow = (currentPage-1)*rowPerPage; //0변부터 출력할 거~ rowPwePage 개수만큼 출력
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("beginRow", beginRow);
-		paramMap.put("rowPerPage", rowPerPage);
-		return employeeMapper.selectTeacherList(paramMap);
-	}
-	
-	//관리자가 학생 등록
-	public int addStudent(Student student) {
-		
-		return employeeMapper.insertStudent(student);
-	}
-	//관리자가 학생 삭제
-	public int removeStudent(int studentNo) {
-		return employeeMapper.deleteStudent(studentNo);
-	}
-	//관리자 쪽에서 보는 학생리스트
-	public List<Student> getStudentList(int currentPage, int rowPerPage) {
-		int beginRow = (currentPage-1)*rowPerPage; //0변부터 출력할 거~ rowPwePage 개수만큼 출력
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("beginRow", beginRow);
-		paramMap.put("rowPerPage", rowPerPage);
-		return employeeMapper.selectStudentList(paramMap);
-	}
-	
 	
 	public int updateEmployeePw(int empNo, String oldPw, String newPw) {
 		// hashMap 다형성..
@@ -82,11 +46,18 @@ public class EmployeeService {
 		return employeeMapper.insertEmployee(employee);
 	}
 	
-	public List<Employee> getEmployeeList(int currentPage, int rowPerPage) {
+	public int selectCount(String searchWord) {
+		return employeeMapper.selectCount(searchWord);
+	}
+	
+	public List<Employee> getEmployeeList(int currentPage, int rowPerPage, String searchWord) {
 		int beginRow = (currentPage-1)*rowPerPage; //0변부터 출력할 거~ rowPwePage 개수만큼 출력
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("beginRow", beginRow);
 		paramMap.put("rowPerPage", rowPerPage);
+		paramMap.put("searchWord", searchWord);
 		return employeeMapper.selectEmployeeList(paramMap);
+		
+		
 	}
 }

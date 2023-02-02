@@ -8,6 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<!-- empMenu include -->
+	<div>
+		<c:import url="/WEB-INF/view/employee/inc/empMenu.jsp"></c:import>
+	</div>
 	<h1>${loginEmp.empName}님 비밀번호 수정</h1>
 	<form action="${pageContext.request.contextPath}/employee/modifyEmpPw" method="post">
 		<table>

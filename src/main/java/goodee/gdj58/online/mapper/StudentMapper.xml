@@ -2,6 +2,54 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goodee.gdj58.online.mapper.StudentMapper">
 	
+	<!-- 관리자가 학생 등록 -->
+	<insert id="insertStudent" parameterType="goodee.gdj58.online.vo.Student">
+		INSERT INTO student (
+			student_id
+			, student_pw
+			, student_name
+		) VALUES (
+			#{studentId}
+			,PASSWORD(#{studentPw})
+			,#{studentName}
+		)
+	</insert>
+	
+	<!-- 관리자가 학생 삭제 -->
+	<delete id="deleteStudent" parameterType="int">  <!-- parameterType: 전달받은 파라이터 데이터 타입 지정(선택적) -->
+		DELETE FROM student
+		WHERE student_no = #{studentNo}
+	</delete>
+	
+	<!--페이징을 위한 총 개수 -->
+	<select id="selectCount" resultType="int">
+		SELECT COUNT(*) FROM student
+		<where>
+			<if test="searchWord != null || searchWord != '' ">
+				student_name like CONCAT('%',#{searchWord},'%')
+			</if>
+		</where>
+	</select>
+	
+	<!-- 관리자 쪽에서 보는 학생리스트 -->
+	<select id="selectStudentList" 
+		resultType="goodee.gdj58.online.vo.Student"
+		parameterType="java.util.Map">
+		
+		SELECT
+			student_no studentNo
+			, student_id studentId
+			, student_name studentName
+		FROM student
+		<where>
+			<if test="searchWord != null || searchWord != '' ">
+				student_name like CONCAT('%',#{searchWord},'%')
+			</if>
+		</where>
+		ORDER BY student_no DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
 	<!-- 학생 로그인 -->
 	<select id="loginStudent" 
 			parameterType="goodee.gdj58.online.vo.Student"
@@ -13,21 +61,5 @@
 	
 	</select>
 	
-	<!-- 학생 회원 탈퇴 -->
-	<delete id="deleteStudent"
-			parameterType="int">
-		
-		DELETE FROM student WHERE student_no=#{studentNo}
-	
-	</delete>
-	
-	<!-- 학생회원가입 -->
-	<insert id="insertStudent" 
-			parameterType="goodee.gdj58.online.vo.Student"> <!-- parameterType: 전달받은 파라이터 데이터 타입 지정(선택적) -->
-		
-		INSERT INTO student ( student_id ,student_pw ,student_name)
-			VALUES (#{studentId}, PASSWORD(#{studentPw}), #{studentName})
-	
-	</insert>
 
 </mapper>
