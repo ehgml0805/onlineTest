@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="goodee.gdj58.online.test.mapper.TestMapper">
+	
+	<!-- test 상세보기에서 문제 리스트 출력 -->
+	<select id="selecQuestionList"
+			parameterType="goodee.gdj58.online.vo.Question"
+					resultType="java.util.Map">
+	
+	SELECT q.question_idx qIdx, q.question_title qTitle, e.example_idx eIdx, e.example_title eTitle, e.answer_ox eOX 
+	FROM question q 
+	INNER JOIN example e 
+	ON q.question_no= e.question_no 
+	WHERE q.test_no=#{testNo}
+	
+	</select>
+	
+	<!-- test List -->
+	<select id="selecTestOne" 
+			parameterType="int" resultType="goodee.gdj58.online.vo.Test">
+		
+		SELECT 
+			test_no testNo
+			, test_title testTitle
+			, test_date testDate
+		FROM test WHERE test_no=#{testNo}
+		
+	</select>
+	
+	<!-- test 추가 -->
+	<insert id="insertTest" parameterType="goodee.gdj58.online.vo.Test">
+		
+		INSERT INTO test
+			 (test_title, test_date)
+		VALUES
+			(#{testTitle}, CURDATE())
+	
+	</insert>
+	
+	<!--페이징을 위한 총 개수 -->
+	<select id="selectCount" resultType="int">
+		SELECT COUNT(*) FROM test
+		<where>
+			<if test="searchWord != null || searchWord != '' ">
+				test_title like CONCAT('%',#{searchWord},'%')
+			</if>
+		</where>
+	</select>
+	
+	<!-- test List -->
+	<select id="selecTestList" 
+			parameterType="goodee.gdj58.online.vo.Test"
+			resultType="java.util.Map">
+		
+		SELECT 
+			test_no testNo
+			, test_title testTitle
+			, test_date testDate
+		FROM test 
+		<where>
+			<if test="searchWord != null || searchWord != '' ">
+				test_title like CONCAT('%',#{searchWord},'%')
+			</if>
+		</where>
+		ORDER BY test_date ASC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+
+
+</mapper>

@@ -6,7 +6,7 @@
 	<update id="updateEmployeePw" parameterType="java.util.Map">
 		UPDATE employee
 		SET emp_pw = PASSWORD(#{newPw})
-		SHERE emp_np=#{empNo} AND emp_pw=PASSWORD(#{oldPw})
+		wHERE emp_np=#{empNo} AND emp_pw=PASSWORD(#{oldPw})
 	
 	</update>
 	<!-- 관리자 로그인 -->

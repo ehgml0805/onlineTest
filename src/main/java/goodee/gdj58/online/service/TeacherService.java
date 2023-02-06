@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import goodee.gdj58.online.mapper.TeacherMapper;
+import goodee.gdj58.online.vo.Employee;
 import goodee.gdj58.online.vo.Teacher;
 @Service
 @Transactional
@@ -26,7 +27,7 @@ public class TeacherService {
 	public int removeTeacher(int teacherNo) {
 		return teachereMapper.deleteTeacher(teacherNo);
 	}
-	
+	//페이징
 	public int selectCount(String searchWord) {
 		return teachereMapper.selectCount(searchWord);
 	}
@@ -39,5 +40,8 @@ public class TeacherService {
 		paramMap.put("rowPerPage", rowPerPage);
 		paramMap.put("searchWord", searchWord);
 		return teachereMapper.selectTeacherList(paramMap);
+	}
+	public Teacher loginTeacher(Teacher teacher) {
+		return teachereMapper.loginTeacher(teacher);
 	}
 }

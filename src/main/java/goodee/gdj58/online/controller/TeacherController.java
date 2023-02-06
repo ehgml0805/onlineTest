@@ -21,7 +21,7 @@ public class TeacherController {
 	@Autowired TeacherService teacherService;
 	@Autowired IdService idService;
 	
-	// 삭제
+	//관리자가 삭제
 	@GetMapping("/employee/teacher/removeTeacher")
 	public String removeTeacher(HttpSession session, @RequestParam("teacherNo") int teacherNo) {
 		
@@ -29,7 +29,7 @@ public class TeacherController {
 		return "redirect:/employee/teacher/teacherList"; // 리스트로 리다이렉트
 	}
 	
-	//입력
+	//관리자가 입력
 	@GetMapping("/employee/teacher/addTeacher")
 	public String addTeacher(HttpSession session) {
 		
@@ -55,7 +55,7 @@ public class TeacherController {
 		return "redirect:/employee/teacher/teacherList";
 	}
 	
-	// 리스트
+	//관리자가 보는 리스트
 	@GetMapping("/employee/teacher/teacherList")
 	public String teacherList(HttpSession session, Model model
 							, @RequestParam(value="currentPage", defaultValue = "1") int currentPage
@@ -83,5 +83,25 @@ public class TeacherController {
 		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("endPage", endPage);
 		return "employee/teacherList";
+	}
+
+	// 로그인
+	@GetMapping("/loginTeacher") //요청 주소
+	public String loginTeacher(HttpSession session) {
+		return "teacher/loginTeacher";
+	}
+	@PostMapping("/loginTeacher")
+	public String loginTeacher(HttpSession session, Teacher teacher) {
+		Teacher resultTeacher = teacherService.loginTeacher(teacher);
+		System.out.println(resultTeacher+"<==로그인 한 강사");
+		session.setAttribute("loginTeacher", resultTeacher);
+
+		return "redirect:/loginTeacher";
+	}
+	//로그아웃
+	@GetMapping("/teacher/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/loginTeacher";
 	}
 }

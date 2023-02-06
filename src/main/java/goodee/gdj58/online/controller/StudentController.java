@@ -84,16 +84,17 @@ public class StudentController {
 	//학생 로그인-관리자 로그인과 같은 화면 쓸 거
 	@GetMapping("/student/loginStudent") //내가 주소창에 사용할 주소
 	public String loginStudent(HttpSession session) {
-		return "employee/loginEmp"; //주소창 주소를 입력하면 보낼곳
+		return "student/loginStudent"; //주소창 주소를 입력하면 보낼곳
 	}
 	@PostMapping("/student/loginStudent")
 	public String loginStudent(HttpSession session, Student student) {
 		//service 호출
 		Student resultStudent = studentService.loginStudent(student);
 		//성공시 세션에 저장
+		System.out.println("로그인 성공");
 		session.setAttribute("loginStudent", resultStudent);
 		
-		return "redirect:/loginEmp";
+		return "redirect:/student/loginStudent";
 	}
 	
 	/*

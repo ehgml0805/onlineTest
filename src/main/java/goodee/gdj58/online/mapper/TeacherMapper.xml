@@ -51,7 +51,7 @@
 			parameterType="goodee.gdj58.online.vo.Teacher"
 			resultType="goodee.gdj58.online.vo.Teacher"> <!-- resultType : 조회 결과 값을 저장하기 위한 데이터 타입(데이터 하나에 대한 타입 지정) -->
 		
-		SELECT teacher_no, teacher_id, teacher_name 
+		SELECT teacher_no teacherNo, teacher_id teacherId, teacher_name teacherName 
 		FROM teacher 
 		WHERE teacher_id=#{teacherId} AND teacher_pw=PASSWORD(#{teacherPw})
 	

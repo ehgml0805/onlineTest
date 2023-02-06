@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="goodee.gdj58.online.test.mapper.ExampleMapper">
+	
+	<!-- 보기 수정 -->
+	<update id="updateExample" parameterType="java.util.Map">
+			
+		UPDATE example 
+		SET example_idx = #{exampleIdx} , example_title =#{exampleTitle} , answer_ox = #{answerOx}
+		WHERE question_no = #{questionNo} AND example_no = #{exampleNo}
+	
+	</update>
+	
+	<!-- 보기 삭제 -->
+	<delete id="deleteExample" parameterType="int">
+			
+		DELETE FROM example WHERE question_no = #{questionNo} AND example_no = #{exampleNo}
+	
+	</delete>
+	
+	<!-- 보기 추가 -->
+	<insert id="insertExample" parameterType="goodee.gdj58.online.vo.Example">
+			
+		INSERT INTO example
+			(question_no, example_idx, example_title , answer_ox)
+		VALUES
+			(#{questionNo}, #{exampleIdx}, #{exampleTitle}, #{answerOx})
+	
+	</insert>
+	
+	<!-- 보기 리스트 -->
+	<select id="selectExampleList" 
+			resultType="goodee.gdj58.online.vo.Example"
+			parameterType="java.util.Map">
+		<!-- resultType : 조회 결과 값을 저장하기 위한 데이터 타입(데이터 하나에 대한 타입 지정)
+			 paramterType : 전달받은 파라이터 데이터 타입 지정(선택적)-->
+		SELECT 
+			example_no
+			, question_no
+			, example_idx
+			, example_title
+			, answer_ox
+		FROM example WHERE question_no
+	
+	</select>
+	
+</mapper>
