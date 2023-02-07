@@ -21,6 +21,24 @@ public class TeacherController {
 	@Autowired TeacherService teacherService;
 	@Autowired IdService idService;
 	
+	//강사가 pw수정
+	@GetMapping("/teacher/modifyTeacherPw")
+	public String modifyTeacherPw(HttpSession session) {
+		
+		return "teacher/modifyTeacherPw";
+	}
+	@PostMapping("/teacher/modifyTeacherPw")
+	public String modifyTeacherPw(HttpSession session
+								, @RequestParam(value = "oldPw") String oldPw
+								, @RequestParam(value = "newPw") String newPw) {
+		//로그인 후 호출가능
+		Teacher loginTeacher = (Teacher)session.getAttribute("loginTeacher");
+		
+		teacherService.updateEmployeePw(loginTeacher.getTeacherNo(), oldPw, newPw);
+		return "teacher/loginTeacher";
+	}
+	
+	
 	//관리자가 삭제
 	@GetMapping("/employee/teacher/removeTeacher")
 	public String removeTeacher(HttpSession session, @RequestParam("teacherNo") int teacherNo) {
@@ -85,6 +103,7 @@ public class TeacherController {
 		return "employee/teacherList";
 	}
 
+	
 	// 로그인
 	@GetMapping("/loginTeacher") //요청 주소
 	public String loginTeacher(HttpSession session) {
@@ -93,11 +112,12 @@ public class TeacherController {
 	@PostMapping("/loginTeacher")
 	public String loginTeacher(HttpSession session, Teacher teacher) {
 		Teacher resultTeacher = teacherService.loginTeacher(teacher);
-		System.out.println(resultTeacher+"<==로그인 한 강사");
+		System.out.println("로그인 성공");
 		session.setAttribute("loginTeacher", resultTeacher);
 
 		return "redirect:/loginTeacher";
 	}
+	
 	//로그아웃
 	@GetMapping("/teacher/logout")
 	public String logout(HttpSession session) {

@@ -62,17 +62,4 @@ public class ExampleController {
 		return "redirect:/test/question/questionOne";
 	}
 	
-	//보기 목록 출력
-	@GetMapping("test/question/questionOne")
-	public String exampleList(HttpSession session, Model model
-								, @RequestParam(value = "currentPage", defaultValue="1") int currentPage
-								, @RequestParam(value = "rowPerPage", defaultValue = "10") int rowPerPage) {
-						//@RequestParam("가져올 데이터의 이름")[데이터타입][가져온 데이터를 담을 변수]
-		List<Example> exList= exampleService.getExampleList(currentPage, rowPerPage);
-		model.addAttribute("exList", exList);
-		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("rowPerPage", rowPerPage);
-		
-		return "test/question/questionOne";
-	}
 }

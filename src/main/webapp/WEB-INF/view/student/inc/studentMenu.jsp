@@ -7,7 +7,7 @@
 		각 리스트 별 점수랑 시험 응시 버튼 누르면 시험봐야대(question JOIN example ) 그러고 답안지 확인 후 제출 까지(paper) 
 		문자랑 보기 그룹콘캣+INNER JOIN 
 	-->
-	<a href="${pageContext.request.contextPath}/teacher/test">시험보기</a>
+	<a href="${pageContext.request.contextPath}/student/testList">시험보기</a>
 	<!-- 모두가 가능 -->
 	<c:if test="${loginEmp != null || loginStudent != null || loginTeacher != null }">
 		<a href="${pageContext.request.contextPath}/student/logout">로그아웃</a>

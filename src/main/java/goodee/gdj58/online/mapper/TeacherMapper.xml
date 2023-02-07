@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goodee.gdj58.online.mapper.TeacherMapper">
+	
+	<!-- 강사 비밀번호 변경 강사가 직접-->
+	<update id="updateTeacherPw" parameterType="java.util.Map">
 		
+		UPDATE teacher
+		SET teacher_pw = PASSWORD(#{newPw})
+		wHERE teacher_no=#{teacherNo} AND teacher_pw=PASSWORD(#{oldPw})
+	
+	</update>
 	
 	<!-- 관리자가 강사 등록 -->
 	<insert id="insertTeacher" parameterType="goodee.gdj58.online.vo.Teacher">
+		
 		INSERT INTO teacher (
 			teachert_id
 			, teacher_pw
@@ -18,18 +27,22 @@
 	
 	<!-- 관리자가 강사 삭제 -->
 	<delete id="deleteTeacher" parameterType="int">
+		
 		DELETE FROM teacher
 		WHERE teacher_no = #{teacherNo}
+	
 	</delete>
 	
 	<!--페이징을 위한 총 개수 -->
 	<select id="selectCount" resultType="int">
+		
 		SELECT COUNT(*) FROM teacher
 		<where>
 			<if test="searchWord != null || searchWord != '' ">
 				teacher_name like CONCAT('%',#{searchWord},'%')
 			</if>
 		</where>
+	
 	</select>
 	
 	<!-- 관리자 쪽에서 보는 강사리스트 -->
@@ -42,6 +55,11 @@
 			, teacher_id teacherId
 			, teacher_name teacherName
 		FROM teacher
+		<where>
+			<if test="searchWord != null || searchWord != '' ">
+				teacher_name like CONCAT('%',#{searchWord},'%')
+			</if>
+		</where>
 		ORDER BY teacher_no DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>

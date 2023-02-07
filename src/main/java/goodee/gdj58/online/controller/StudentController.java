@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import goodee.gdj58.online.service.IdService;
 import goodee.gdj58.online.service.StudentService;
-import goodee.gdj58.online.vo.Employee;
 import goodee.gdj58.online.vo.Student;
 
 @Controller
@@ -21,14 +20,32 @@ public class StudentController {
 	//DI = new 연산자 역할
 	@Autowired StudentService studentService;
 	@Autowired IdService idService;
-	//관리자가
-	// 삭제
+	//학생이 pw수정
+	@GetMapping("/student/modifyStudentPw")
+	public String modifyStudentPw(HttpSession session) {
+		
+		return "student/modifyStudentPw";
+	}
+	@PostMapping("/student/modifyStudentPw")
+	public String modifyStudentPw(HttpSession session
+								, @RequestParam(value = "oldPw") String oldPw
+								, @RequestParam(value = "newPw") String newPw) {
+		//로그인 후 호출가능
+		Student loginStudent = (Student)session.getAttribute("loginStudent");
+		
+		studentService.updateStudentPw(loginStudent.getStudentNo(), oldPw, newPw);
+		return "student/loginStudent";
+	}
+	
+	
+	//관리자가 삭제
 	@GetMapping("/employee/student/removeStudent")
 	public String removeStudent(HttpSession session, @RequestParam("studentNo") int studentNo) {
 		studentService.removeStudent(studentNo);
 		return "redirect:/employee/student/studentList"; // 리스트로 리다이렉트
 	}
-	// 입력
+	
+	//관리자가 입력
 	@GetMapping("/employee/student/addStudent")
 	public String addStudent(HttpSession session) {
 		return "employee/addStudent"; // forword
@@ -52,7 +69,8 @@ public class StudentController {
 		
 		return "redirect:/employee/student/studentList";
 	}
-	// 리스트
+	
+	//관리자가 보는 리스트
 	@GetMapping("/employee/student/studentList")
 	public String studentList(HttpSession session, Model model
 							, @RequestParam(value="currentPage", defaultValue = "1") int currentPage
@@ -81,22 +99,30 @@ public class StudentController {
 		return "employee/studentList"; //파일 위치인듯?
 	}
 	
-	//학생 로그인-관리자 로그인과 같은 화면 쓸 거
-	@GetMapping("/student/loginStudent") //내가 주소창에 사용할 주소
+	
+	//학생 로그인
+	@GetMapping("/loginStudent") //내가 주소창에 사용할 주소
 	public String loginStudent(HttpSession session) {
 		return "student/loginStudent"; //주소창 주소를 입력하면 보낼곳
 	}
-	@PostMapping("/student/loginStudent")
+	@PostMapping("/loginStudent")
 	public String loginStudent(HttpSession session, Student student) {
 		//service 호출
 		Student resultStudent = studentService.loginStudent(student);
 		//성공시 세션에 저장
+		System.out.println(resultStudent+"<==로그인 성공");
 		System.out.println("로그인 성공");
 		session.setAttribute("loginStudent", resultStudent);
 		
-		return "redirect:/student/loginStudent";
+		return "redirect:/loginStudent";
 	}
 	
+	//로그아웃
+	@GetMapping("/student/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/loginStudent";
+	}
 	/*
 	 * //학생 회원가입
 	 * 

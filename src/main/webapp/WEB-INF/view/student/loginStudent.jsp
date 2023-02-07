@@ -8,10 +8,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<!-- 학생 나중에 부트스트랩 적용 -->
+	<!-- empMenu include -->
+	<div>
+		<c:import url="/WEB-INF/view/student/inc/studentMenu.jsp"></c:import>
+	</div>
 	<c:if test="${loginStudent==null}">
-		<form method="post" action="${pageContext.request.contextPath}/student/loginStudent">
+		<form method="post" action="${pageContext.request.contextPath}/loginStudent">
 			<table border="1">
 				<tr>
 					<td>studentId</td>
@@ -27,8 +29,7 @@
 	</c:if>
 	<!-- 로그인 됨 -->
 	<c:if test="${loginStudent!=null}">
-	${loginEmp.empName} 님 반갑습니다.
-	<a href="${pageContext.request.contextPath}/employee/logout">로그아웃</a>
+	${loginStudent.studentName} 님 반갑습니다.
 	</c:if>
 	
 </body>

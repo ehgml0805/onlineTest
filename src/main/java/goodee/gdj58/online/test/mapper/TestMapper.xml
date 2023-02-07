@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goodee.gdj58.online.test.mapper.TestMapper">
-	
+
 	<!-- test 상세보기에서 문제 리스트 출력 -->
 	<select id="selecQuestionList"
 			parameterType="goodee.gdj58.online.vo.Question"
 					resultType="java.util.Map">
+		
+		SELECT t.test_no testNo, q.question_idx qIdx, q.question_title qTitle
+		FROM question q 
+		INNER JOIN test t ON q.test_no=t.test_no 
+		WHERE t.test_no=#{testNo}
 	
-	SELECT q.question_idx qIdx, q.question_title qTitle, e.example_idx eIdx, e.example_title eTitle, e.answer_ox eOX 
-	FROM question q 
-	INNER JOIN example e 
-	ON q.question_no= e.question_no 
-	WHERE q.test_no=#{testNo}
+		<!-- SELECT q.question_idx qIdx, q.question_title qTitle, e.example_idx eIdx, e.example_title eTitle, e.answer_ox eOX 
+		FROM question q 
+		INNER JOIN example e 
+		ON q.question_no= e.question_no 
+		WHERE q.test_no=#{testNo} -->
 	
 	</select>
 	
@@ -23,6 +28,7 @@
 			test_no testNo
 			, test_title testTitle
 			, test_date testDate
+			, test_state testState
 		FROM test WHERE test_no=#{testNo}
 		
 	</select>
@@ -47,7 +53,27 @@
 		</where>
 	</select>
 	
-	<!-- test List -->
+	<!--학생 test List -->
+	<select id="selecTestListBystudent" 
+			parameterType="goodee.gdj58.online.vo.Test"
+			resultType="java.util.Map">
+		
+		SELECT 
+			test_no testNo
+			, test_title testTitle
+			, test_date testDate
+			, test_state testState
+		FROM test 
+		<where>
+			<if test="searchWord != null || searchWord != '' ">
+				test_title like CONCAT('%',#{searchWord},'%')
+			</if>
+		</where>
+		ORDER BY test_date ASC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<!--강사 test List -->
 	<select id="selecTestList" 
 			parameterType="goodee.gdj58.online.vo.Test"
 			resultType="java.util.Map">
@@ -65,6 +91,5 @@
 		ORDER BY test_date ASC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
-
 
 </mapper>

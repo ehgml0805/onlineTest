@@ -35,13 +35,15 @@
 		<!-- resultType : 조회 결과 값을 저장하기 위한 데이터 타입(데이터 하나에 대한 타입 지정)
 			 paramterType : 전달받은 파라이터 데이터 타입 지정(선택적)-->
 		SELECT 
-			example_no
-			, question_no
-			, example_idx
-			, example_title
-			, answer_ox
-		FROM example WHERE question_no
-	
+			example_no eNo
+			, question_no qNo
+			, example_idx eIdx
+			, example_title eTitle
+			, answer_ox eOx
+		FROM example 
+		WHERE question_no=#{questionNo}
+		ORDER BY example_no ASC
+		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	
 </mapper>

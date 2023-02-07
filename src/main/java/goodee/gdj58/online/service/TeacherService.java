@@ -18,16 +18,28 @@ public class TeacherService {
 	@Autowired private TeacherMapper teachereMapper;
 	
 	//변수 타입은 mapper에서 쓴 타입과 동일해야 함
+	//강사 비밀번호 변경
+	public int updateEmployeePw(int teacherNo, String oldPw, String newPw) {
+		// hashMap 다형성..
+		Map<String,Object> paramMap= new HashMap<String, Object>();
+		paramMap.put("teacherNo", teacherNo);
+		paramMap.put("oldPw", oldPw);
+		paramMap.put("newPw", newPw);
+		return teachereMapper.updateTeacherPw(paramMap);
+		
+	}
+	
 	//관리자가 강사 등록
 	public int addTeacher(Teacher teacher) {
-		
 		return teachereMapper.insertTeacher(teacher);
 	}
+	
 	//관리자가 강사 삭제
 	public int removeTeacher(int teacherNo) {
 		return teachereMapper.deleteTeacher(teacherNo);
 	}
-	//페이징
+	
+	//페이징을 위한 총 개수
 	public int selectCount(String searchWord) {
 		return teachereMapper.selectCount(searchWord);
 	}
@@ -41,6 +53,7 @@ public class TeacherService {
 		paramMap.put("searchWord", searchWord);
 		return teachereMapper.selectTeacherList(paramMap);
 	}
+	//강사 로그인
 	public Teacher loginTeacher(Teacher teacher) {
 		return teachereMapper.loginTeacher(teacher);
 	}

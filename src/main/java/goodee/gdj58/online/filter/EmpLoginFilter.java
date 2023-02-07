@@ -21,26 +21,28 @@ public class EmpLoginFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+	
+	log.debug("EmpLoginFilter");
+	
+	if(request instanceof HttpServletRequest) {
+		HttpServletRequest req = (HttpServletRequest)request;
+		HttpSession session = req.getSession();
 		
-		log.debug("EmpLoginFilter");
-		
-		if(request instanceof HttpServletRequest) {
-			HttpServletRequest req = (HttpServletRequest)request;
-			HttpSession session = req.getSession();
-			
-			if(session.getAttribute("loginEmp") == null || session.getAttribute("loginStudent") == null) {
-				((HttpServletResponse)response).sendRedirect(req.getContextPath()+"/loginEmp");
-				return;
-			}
-		} else {
-			log.debug("\u001B[31m"+"웹브라우저 요청만 허용합니다");
+		if(session.getAttribute("loginEmp") == null) {
+			((HttpServletResponse)response).sendRedirect(req.getContextPath()+"/loginEmp");
 			return;
 		}
-		
-		
-		// controller 전
-		chain.doFilter(request, response);
-		// controller 후
+	} else {
+		log.debug("\u001B[31m"+"웹브라우저 요청만 허용합니다");
+		return;
 	}
+	
+	
+	// controller 전
+	chain.doFilter(request, response);
+	// controller 후
+
+	}
+
 
 }

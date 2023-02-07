@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<!-- empMenu include -->
+	<!-- empMenu include -->
 	<div>
 		<c:import url="/WEB-INF/view/teacher/inc/teacherMenu.jsp"></c:import>
 	</div>

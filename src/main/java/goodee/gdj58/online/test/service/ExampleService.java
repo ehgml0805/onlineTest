@@ -39,11 +39,11 @@ public class ExampleService {
 		return exampleMapper.insertExample(example);
 	}
 	
-	//보기리스트: 페이징 해야 해?
-	public List<Example> getExampleList(int currentPage, int rowPerPage){
-		//시작페이지
+	//문제의 보기
+	public List<Example> getExampleList(int questionNo, int currentPage, int rowPerPage){
 		int beginRow = (currentPage-1)*rowPerPage;
 		Map<String, Object> paramMap= new HashMap<String, Object>();
+		paramMap.put("questionNo", questionNo);
 		paramMap.put("beginRow", beginRow);
 		paramMap.put("rowPerPage", rowPerPage);
 		return exampleMapper.selectExampleList(paramMap);

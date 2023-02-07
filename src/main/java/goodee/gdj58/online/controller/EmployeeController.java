@@ -28,7 +28,7 @@ public class EmployeeController {
 	@GetMapping("/employee/modifyEmpPw")
 	public String modifyEmpPw(HttpSession session) {
 		
-		return "employee/loginEmp";
+		return "employee/modifyEmpPw";
 	}
 	@PostMapping("/employee/modifyEmpPw")
 	public String modifyEmpPw(HttpSession session
@@ -50,7 +50,7 @@ public class EmployeeController {
 	public String loginEmp(HttpSession session, Employee emp) {
 		Employee resultEmp = employeeService.login(emp);
 		session.setAttribute("loginEmp", resultEmp);
-
+		System.out.println(resultEmp+"<==세션 저장 결과 값");
 		return "redirect:/loginEmp";
 	}
 	

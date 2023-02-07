@@ -16,26 +16,21 @@
 		${to.testNo}
 		${to.testTitle}
 		${to.testDate}
+		${to.testState}
 	</c:forEach>
 	<div>
 	<table border="1">
 		<tr>
-			<td>문제 번호</td>
-			<td>문제 제목</td>
-			<td>보기 번호</td>
-			<td>보기 내용</td>
-			<td>정답</td>
-		</tr>
-		<tr>
-			<c:forEach var="q" items="${qList}" begin="" step="1">
-			<c:if test="${status.index%5==0}"> <!-- td가 계속 반복해서 떠서 5개의 인덱스가 생기면 줄바꿈 -->
-				</tr><tr>
-			</c:if>
+			<c:forEach var="q" items="${qList}" step="1">
 				<td>${q.qIdx}</td>
 				<td>${q.qTitle}</td>
-				<td>${q.eIdx}</td>
-				<td>${q.eTitle}</td>
-				<td>${q.eOX}</td>
+			</c:forEach>
+		</tr>
+		<tr>
+			<c:forEach var="e" items="${exList}" >
+				<td>${e.eIdx }</td>
+				<td>${e.eTitle }</td>
+				<td>${e.eOx }</td>
 			</c:forEach>
 		</tr>
 	</table>

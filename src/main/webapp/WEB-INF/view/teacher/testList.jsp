@@ -22,6 +22,8 @@
 			<th>No</th>
 			<th>Title</th>
 			<th>Date</th>
+			<th>수정</th>
+			<th>삭제</th>
 		</tr>
 		<c:forEach var="t" items="${tList}">
 			<tr>
@@ -30,6 +32,8 @@
 					<a href="${pageContext.request.contextPath}/teacher/testOne?testNo=${t.testNo}">${t.testTitle}</a>
 				</td>
 				<td>${t.testDate}</td>
+				<td><a href="${pageContext.request.contextPath}/teacher/modifyTest?testNo=${t.testNo}">수정</td>
+				<td><a href="${pageContext.request.contextPath}/teacher/removeTest?testNo=${t.testNo}">삭제</td>
 			</tr>
 		</c:forEach>
 	</table>

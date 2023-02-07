@@ -6,9 +6,10 @@
 	<update id="updateEmployeePw" parameterType="java.util.Map">
 		UPDATE employee
 		SET emp_pw = PASSWORD(#{newPw})
-		wHERE emp_np=#{empNo} AND emp_pw=PASSWORD(#{oldPw})
+		wHERE emp_no=#{empNo} AND emp_pw=PASSWORD(#{oldPw})
 	
 	</update>
+	
 	<!-- 관리자 로그인 -->
 	<select id="login" 
 		parameterType="goodee.gdj58.online.vo.Employee"
