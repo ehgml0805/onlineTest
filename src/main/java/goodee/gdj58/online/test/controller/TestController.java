@@ -1,6 +1,8 @@
 package goodee.gdj58.online.test.controller;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import goodee.gdj58.online.test.service.ExampleService;
 import goodee.gdj58.online.test.service.TestService;
 import goodee.gdj58.online.vo.Example;
-import goodee.gdj58.online.vo.Question;
 import goodee.gdj58.online.vo.Test;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,15 +26,34 @@ public class TestController {
 	@Autowired ExampleService exampleService;
 	//tsetOne 상세보기
 	@GetMapping("teacher/testOne")
-	public String testOne(HttpSession session, Model model, int testNo) {
+	public String testOne(HttpSession session, Model model, int testNo, Example example) {
 		
 		//test 상세보기
-		List<Test> tOList=testService.getTestOne(testNo);
-		model.addAttribute("tOList", tOList);
+		List<Map<String, Object>> tQList=testService.getTestOne(testNo);
+		model.addAttribute("tQList", tQList);
+		model.addAttribute("testNo", testNo);
+		/*
+		 * for(Map<String, Object> qm: tQList) { int qIdx=(int) qm.get("qIdx");
+		 * System.out.println(qIdx+"<---qIdx");
+		 * 
+		 * List<Example> eList=exampleService.getExampleList(qIdx);
+		 * //null,null,null,null 뜬다 왜...? System.out.println(eList+"<---eList");
+		 * model.addAttribute("eList", eList); }
+		 */
 		//testOne에서 질문 목록 출력
-		List<Question> qList=testService.getQuestionList(testNo);
-		model.addAttribute("qList", qList);
-		
+		for(Map<String, Object> qm: tQList) { 
+			int qIdx=(int) qm.get("qIdx");
+			System.out.println(qIdx+"<---qIdx");
+			List<Map<String, Object>> eList=exampleService.getExampleList(qIdx);
+			if(eList.isEmpty()) {
+				eList=exampleService.getExampleList(qIdx-1);
+				model.addAttribute("eList", eList);
+			}else {
+			System.out.println(eList+"<---eList");
+			model.addAttribute("eList", eList); 
+			}
+		}
+			
 		return "teacher/testOne";
 	}
 	

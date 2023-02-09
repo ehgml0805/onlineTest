@@ -40,12 +40,13 @@ public class ExampleService {
 	}
 	
 	//문제의 보기
-	public List<Example> getExampleList(int questionNo, int currentPage, int rowPerPage){
-		int beginRow = (currentPage-1)*rowPerPage;
-		Map<String, Object> paramMap= new HashMap<String, Object>();
-		paramMap.put("questionNo", questionNo);
-		paramMap.put("beginRow", beginRow);
-		paramMap.put("rowPerPage", rowPerPage);
-		return exampleMapper.selectExampleList(paramMap);
+	public List<Map<String, Object>> getExampleList(int qIdx){
+		//int beginRow = (currentPage-1)*rowPerPage;
+		//Map<String, Object> paramMap= new HashMap<String, Object>();
+		//paramMap.put("qIdx", qIdx);
+		
+		//paramMap.put("beginRow", beginRow);
+		//paramMap.put("rowPerPage", rowPerPage);
+		return exampleMapper.selectExampleList(qIdx);
 	}
 }

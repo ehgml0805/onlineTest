@@ -19,17 +19,9 @@ public class TestService {
 	//DI = new 연산자 역할
 	@Autowired private TestMapper testMapper;
 	
-	
-	//test 상세보기에서 문제 목록 출력
-	public List<Question> getQuestionList(int testNo){
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("testNo", testNo);
-		return testMapper.selecQuestionList(paramMap);
-	}
+
 	//tsetOne 상세보기 
-	public List<Test> getTestOne(int testNo) {
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("testNo", testNo);
+	public List<Map<String, Object>> getTestOne(int testNo) {
 		return testMapper.selecTestOne(testNo);
 	}
 	

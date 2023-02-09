@@ -11,10 +11,9 @@ import goodee.gdj58.online.vo.Test;
 
 @Mapper
 public interface TestMapper {
-	//시험 상세보기에서 문제 불러오기
-	List<Question> selecQuestionList(Map<String, Object> paramMap);
+	
 	//시험 상세보기 
-	List<Test> selecTestOne(int testNo);
+	List<Map<String, Object>> selecTestOne(int testNo);
 	//test 추가
 	int insertTest(Test test);
 	//마지막 페이징

@@ -16,6 +16,7 @@ public interface ExampleMapper {
 	//보기 추가
 	int insertExample(Example example);
 	//보기 출력
-	List<Example> selectExampleList (Map<String, Object> paramMap );
+	//List<Example> selectExampleList (Map<String, Object> paramMap );
+	List<Map<String, Object>> selectExampleList(int qIdx);
 	
 }

@@ -13,7 +13,7 @@
 	</div>
 	
 	<h1>Employee List</h1>
-	<a href="${pageContext.request.contextPath}/test/addTest">사원등록</a>
+	<a href="${pageContext.request.contextPath}/employee/addEmp">사원등록</a>
 	<table>
 		<tr>
 			<th>empId</th>

@@ -33,4 +33,7 @@
 	</c:if>
 
 </body>
+<script>
+    
+</script>
 </html>

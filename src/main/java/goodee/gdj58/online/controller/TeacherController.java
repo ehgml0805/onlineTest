@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import goodee.gdj58.online.service.IdService;
 import goodee.gdj58.online.service.TeacherService;
-import goodee.gdj58.online.vo.Employee;
 import goodee.gdj58.online.vo.Teacher;
 @Controller
 public class TeacherController {
