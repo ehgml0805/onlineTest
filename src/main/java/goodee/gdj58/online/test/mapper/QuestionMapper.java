@@ -8,9 +8,11 @@ import org.apache.ibatis.annotations.Mapper;
 import goodee.gdj58.online.vo.Question;
 @Mapper
 public interface QuestionMapper {
-	//시험 수정
+	//문제 수정
 	int updateQuestion(Map<String,Object> paramMap);
-	//시험 삭제
+	//문제 상세보기
+	Question questionOne(int questionNo);
+	//문제 삭제
 	int deleteQuestion(int questionNo);
 	//시험추가
 	int insertQuestion(Question question);

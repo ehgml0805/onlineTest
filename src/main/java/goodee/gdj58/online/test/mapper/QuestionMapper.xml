@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goodee.gdj58.online.test.mapper.QuestionMapper">
 	
-	<!-- 시험 수정 -->
+	<!-- 문제 수정 -->
 	<update id="updateQuestion" parameterType="java.util.Map">
 			
 		UPDATE question 
@@ -11,14 +11,21 @@
 	
 	</update>
 	
-	<!-- 시험 삭제 -->
+	<!-- 문제 상세보기 -->
+	<select id="questionOne" parameterType="int" resultType="goodee.gdj58.online.vo.Question">
+	
+		SELECT test_no testNo, question_idx questionIdx, question_title questionTitle
+		FROM question WHERE question_idx=#{questionIdx}
+		
+	</select>
+	<!-- 문제 삭제 -->
 	<delete id="deleteQuestion" parameterType="int">
 			
 		DELETE FROM question WHERE question_no = #{questionNo} AND test_no = #{testNo}
 	
 	</delete>
 	
-	<!-- 시험 추가 -->
+	<!-- 문제 추가 -->
 	<insert id="insertQuestion" parameterType="goodee.gdj58.online.vo.Question">
 			
 		INSERT INTO question
@@ -28,7 +35,7 @@
 	
 	</insert>
 	
-	<!-- 시험 리스트 -->
+	<!-- 문제 리스트 -->
 	<select id="selecQuestionList" 
 			resultType="goodee.gdj58.online.vo.Question"
 			parameterType="java.util.Map">

@@ -45,9 +45,10 @@ public class TestController {
 			int qIdx=(int) qm.get("qIdx");
 			System.out.println(qIdx+"<---qIdx");
 			List<Map<String, Object>> eList=exampleService.getExampleList(qIdx);
-			if(eList.isEmpty()) {
-				eList=exampleService.getExampleList(qIdx-1);
-				model.addAttribute("eList", eList);
+			if(eList.isEmpty()) { //보기가 없을때 
+				String meg="보기가 없습니다.";
+				System.out.println("보기가 없습니다.");
+				model.getAttribute(meg);
 			}else {
 			System.out.println(eList+"<---eList");
 			model.addAttribute("eList", eList); 
@@ -56,7 +57,7 @@ public class TestController {
 			
 		return "teacher/testOne";
 	}
-	
+		
 	//강사가 test 입력
 	@PostMapping("teacher/addTest")
 	public String addTest(HttpSession session, Test test, Model model) {

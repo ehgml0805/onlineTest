@@ -16,8 +16,22 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class QuestionController {
 	@Autowired QuestionService questionService;
+	//시험 수정
+	@GetMapping("teacher/modifyQuestion")
+	public String modifyQuestion(HttpSession session, int questionIdx) {
+		Question questionOne=questionService.getQuestionOne(questionIdx);
+		int qIdx=questionOne.getQuestionIdx();
+		int tNo=questionOne.getTestNo();
+		String qTitle=questionOne.getQuestionTitle();
+		
+		System.out.println(qIdx+"<==qIdx");
+		System.out.println(tNo+"<==tNo");
+		System.out.println(qTitle+"<==qTitle");
+		return "teacher/modifyQuestion";
+	}
+	
 	//시험 삭제
-	@GetMapping("test/question/removeQuestion")
+	@GetMapping("teacher/removeQuestion")
 	public String removeQuestion(HttpSession session, @RequestParam("questionNo") int questionNo) {
 		questionService.removeQuestion(questionNo);
 		

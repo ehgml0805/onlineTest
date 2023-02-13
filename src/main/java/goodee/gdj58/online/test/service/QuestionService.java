@@ -28,6 +28,10 @@ public class QuestionService {
 		
 		return questionMapper.updateQuestion(paramMap);
 	}
+	//문제 상세보기
+	public Question getQuestionOne(int questionIdx) {
+		return questionMapper.questionOne(questionIdx);
+	}
 	
 	//시험 삭제
 		public int removeQuestion(int questionNo) {
