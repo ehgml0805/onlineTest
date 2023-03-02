@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,16 +19,38 @@ public class QuestionController {
 	@Autowired QuestionService questionService;
 	//시험 수정
 	@GetMapping("teacher/modifyQuestion")
-	public String modifyQuestion(HttpSession session, int questionIdx) {
-		Question questionOne=questionService.getQuestionOne(questionIdx);
+	public String modifyQuestion(HttpSession session,Model model ,int questionNo) {
+		Question questionOne=questionService.getQuestionOne(questionNo);
+		//int qNo=questionOne.getQuestionNo();
 		int qIdx=questionOne.getQuestionIdx();
 		int tNo=questionOne.getTestNo();
 		String qTitle=questionOne.getQuestionTitle();
 		
-		System.out.println(qIdx+"<==qIdx");
-		System.out.println(tNo+"<==tNo");
-		System.out.println(qTitle+"<==qTitle");
+		model.addAttribute("qNo", questionNo);
+		model.addAttribute("qIdx", qIdx);
+		model.addAttribute("tNo", tNo);
+		model.addAttribute("qIdxqTitle", qTitle);
+		
+		/*
+		 * System.out.println(qIdx+"<==qIdx"); System.out.println(tNo+"<==tNo");
+		 * System.out.println(qTitle+"<==qTitle");
+		 */
 		return "teacher/modifyQuestion";
+	}
+	@PostMapping("teacher/modifyQuestion")
+	public String modifyQuestion(HttpSession session, Model model , Question question
+								, @RequestParam(value = "testNo") int testNo
+								, @RequestParam(value = "questionIdx") int questionIdx
+								, @RequestParam(value = "questionTitle") String questionTitle) {
+		question= new Question();
+		question.setQuestionIdx(questionIdx);
+		question.setQuestionTitle(questionTitle);
+		question.setTestNo(testNo);
+		int row=questionService.modifyQuestion(question);
+		log.debug("문제 수정 성공");
+		
+		return "teacher/testOne";
+		
 	}
 	
 	//시험 삭제

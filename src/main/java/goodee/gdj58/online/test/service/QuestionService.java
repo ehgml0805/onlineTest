@@ -29,8 +29,8 @@ public class QuestionService {
 		return questionMapper.updateQuestion(paramMap);
 	}
 	//문제 상세보기
-	public Question getQuestionOne(int questionIdx) {
-		return questionMapper.questionOne(questionIdx);
+	public Question getQuestionOne(int questionNo) {
+		return questionMapper.questionOne(questionNo);
 	}
 	
 	//시험 삭제

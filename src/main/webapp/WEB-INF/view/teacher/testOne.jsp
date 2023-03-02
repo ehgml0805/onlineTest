@@ -22,7 +22,7 @@
 			<div>
 				문제 ${tq.qIdx}. ${tq.qTitle}
 				<a href="${pageContext.request.contextPath}/teacher/removeQuestion?questionNo=${tq.qIdx}">삭제</a>
-				<a href="${pageContext.request.contextPath}/teacher/modifyQuestion?questionNo=${tq.qIdx}&testNo=${tq.testNo}">수정</a>
+				<a href="${pageContext.request.contextPath}/teacher/modifyQuestion?questionNo=${tq.questionNo}&testNo=${tq.testNo}">수정</a>
 			</div>
 			<br>
 			<c:forEach var="e" items="${eList}">
@@ -39,6 +39,18 @@
 		
 		<br>
 		<!-- 시험문제 추가 20개까지 -->
+		<form method="post" action="${pageContext.request.contextPath}/teacher/addQuestion">
+			시험 번호 <input type="text" name="testNo" value="${testNo}" readonly="readonly">
+			<div>
+				문제 번호 <input type="text" name="questionIdx">
+				제목 <input type="text" name="questionTitle">
+			</div>
+			<div>
+				<button type="submit">문제추가</button>
+			</div>
+		</form>
+		
+		<!-- 시험문제 보기 추가 20개까지 -->
 		<form method="post" action="${pageContext.request.contextPath}/teacher/addQuestion">
 			시험 번호 <input type="text" name="testNo" value="${testNo}" readonly="readonly">
 			<div>
