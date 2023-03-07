@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import goodee.gdj58.online.test.service.ExampleService;
+import goodee.gdj58.online.test.service.QuestionService;
 import goodee.gdj58.online.test.service.TestService;
 import goodee.gdj58.online.vo.Example;
 import goodee.gdj58.online.vo.Teacher;
@@ -23,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class TestController {
 	@Autowired TestService testService;
+	@Autowired QuestionService questionService;
 	@Autowired ExampleService exampleService;
 	//test삭제
 	@GetMapping("teacher/removeTest")
@@ -48,19 +50,25 @@ public class TestController {
 	
 	//tsetOne 상세보기
 	@GetMapping("teacher/testOne")
-	public String testOne(HttpSession session, Model model, int testNo, Example example) {
+	public String testOne(HttpSession session, Model model, int testNo) {
 		
-		//test 상세보기
+		List<Map<String, Object>> testOne =testService.getTestOne(testNo);
+		model.addAttribute("testOne", testOne);
+		List<Map<String, Object>> QList =questionService.getTestQList(testNo);
+		model.addAttribute("QList", QList);
+		/*test 상세보기
 		List<Map<String, Object>> tQList=testService.getTestOne(testNo);
 		model.addAttribute("tQList", tQList);
-		model.addAttribute("testNo", testNo);
+		model.addAttribute("testNo", testNo);*/
 	
 		//testOne에서 질문 목록 출력
-		for(Map<String, Object> qm: tQList) { 
-			int qIdx=(int) qm.get("qIdx");
+		for(Map<String, Object> qm: QList) { 
+			int questionNo=(int) qm.get("questionNo");
+			List<Map<String, Object>> EList =exampleService.getTestEList(questionNo, testNo);
 			String testTitle=(String)qm.get("testTitle");
 			model.addAttribute("testTitle", testTitle);
-			System.out.println(qIdx+"<---qIdx");
+		}
+			/*
 			List<Map<String, Object>> eList=exampleService.getExampleList(qIdx);
 			if(eList.isEmpty()) { //보기가 없을때 
 				String meg="보기가 없습니다.";
@@ -71,7 +79,7 @@ public class TestController {
 			model.addAttribute("eList", eList); 
 			}
 		}
-			
+		*/
 		return "teacher/testOne";
 	}
 		

@@ -10,12 +10,12 @@ import goodee.gdj58.online.vo.Question;
 public interface QuestionMapper {
 	//문제 수정
 	int updateQuestion(Map<String,Object> paramMap);
-	//문제 상세보기
+	//문제 상세보기 안쓸듯
 	Question questionOne(int questionNo);
 	//문제 삭제
 	int deleteQuestion(int questionNo, int testNo);
 	//시험추가
 	int insertQuestion(Question question);
-	//test ->question 문제 리스트 
-	List<Question> selecQuestionList(Map<String, Object> paramMap);
+	//testone에서 문제 리스트 List<Map<String, Object>>: 키값이 아닌, 데이터를 이용한 정렬
+	List<Map<String, Object>> testByQList(int testNo);
 }

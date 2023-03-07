@@ -17,7 +17,10 @@
 		<c:import url="/WEB-INF/view/teacher/inc/teacherMenu.jsp"></c:import>
 	</div>
 	<h1>Test List</h1>
-
+	<c:forEach var="testOne" items="testOne">
+	</c:forEach>
+	
+	
 	<!-- 시험 추가 모달 버튼 -->
 	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#testModal" id="addTest">시험추가</button>
 	<!-- 시험 추가 모달 내부 -->
@@ -69,7 +72,6 @@
 				<td>${t.teacherNo}</td>
 				<td>${t.testDate}</td>
 				<td>
-					<input type="text" value="${t.testNo}" id="testNo">
 					<a data-bs-toggle="modal" data-bs-target="#testModefyModal" 
 					href="${pageContext.request.contextPath}/teacher/modifyTest?testNo=${t.testNo}&teacherNo=${t.teacherNo}">수정</a>
 				</td>
@@ -95,7 +97,7 @@
 					<form action="${pageContext.request.contextPath}/teacher/modefyTest" method="post">
 						<div class="mb-3">
 							<label for="recipient-name" class="col-form-label">시험 번호</label>
-							<input type="text" class="form-control" id="inputValue" value="" name="inputValue"/>
+							<input type="text" class="form-control" id="testNo" value="" name="testNo"/>
 						</div>
 
 						<div class="mb-3">
@@ -104,7 +106,7 @@
 						</div>
 						<div class="mb-3">
 							<label for="message-text" class="col-form-label">TeacherNo</label>
-							<input type="text" name="TeacherNo" class="form-control" id="teacherNo" value="${teacherNo}" name="teacherNo">
+							<input type="text" name="TeacherNo" class="form-control" id="teacherNo" value="${teacherNo}" name="teacherNo" readonly="readonly">
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
@@ -155,7 +157,7 @@
 		const testNoInputEl = document.querySelector('#inputValue')
 		
 	
-		modalTl.addEventListener('shown.bs.modal', function () {
+		/* modalTl.addEventListener('shown.bs.modal', function () {
 		 let testNo=document.getElementById("testNo").value
 		var list = new Array(); 
 		list.push("${tList}"); 
@@ -164,7 +166,7 @@
 		 console.log(testNo+"<==testNo")
 		 
 			$('input[name=inputValue]').attr('value',testNo);
-		})
+		}) */
 		
 	</script>
 	<script

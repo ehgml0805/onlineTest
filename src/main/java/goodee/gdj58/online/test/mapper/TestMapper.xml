@@ -19,11 +19,10 @@
 	<!-- test One -->
 	<select id="selecTestOne" 
 			parameterType="int" resultType="java.util.Map">
-		
-		SELECT t.test_no testNo, t.test_title testTitle, t.test_date testDate, q.question_no questionNo ,q.question_idx qIdx, q.question_title qTitle
-		FROM question q 
-		INNER JOIN test t ON q.test_no=t.test_no 
-		WHERE t.test_no=#{testNo}
+
+		SELECT test_no testNo, test_title testTitle, test_date testDate, teacher_no teacherNo
+		FROM test
+		WHERE test_no=#{testNo}
 		
 	</select>
 	

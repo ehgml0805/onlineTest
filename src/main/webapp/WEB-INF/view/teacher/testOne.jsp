@@ -14,13 +14,27 @@
 		<c:import url="/WEB-INF/view/teacher/inc/teacherMenu.jsp"></c:import>
 	</div>
 	<h1></h1>
-		<c:forEach var="tq" items="${tQList}">
+		<c:forEach var="one" items="${testOne}">
+		${one.testNo},${one.testTitle},${one.testDate},${one.teacherNo}
+		</c:forEach>
+		<div>
+		<c:forEach var="Q" items="${QList}">
+			<c:if test="${status.index%2==0}"> <!-- 5개의 인덱스가 생기면 줄바꿈 -->
+				</div><div>
+			</c:if>
+		문제 ${Q.qIdx}. ${Q.qTitle}
+			<c:forEach var="Q" items="${QList}">
+			
+			</c:forEach>
+			</div>
+		</c:forEach>
+		<%-- <c:forEach var="tq" items="${tQList}">
 			<c:if test="${status.index%5==0}"> <!-- 5개의 인덱스가 생기면 줄바꿈 -->
 				</div><div>
 			</c:if>
-			<%-- 시험 번호: ${tq.testNo},
+			시험 번호: ${tq.testNo},
 			시험 제목: ${tq.testTitle},
-			시험 날짜: ${tq.testDate} --%>
+			시험 날짜: ${tq.testDate}
 			<div>
 			
 				문제 ${tq.qIdx}. ${tq.qTitle}
@@ -38,11 +52,11 @@
 					&nbsp;${e.eTitle}
 					&nbsp;${e.eOx}
 				</c:if>
-			</c:forEach>
 				<c:if test="${tq.qIdx != e.qIdx}">
 				 보기추가
 				</c:if>
-		</c:forEach>
+			</c:forEach>
+		</c:forEach> --%>
 		
 		<br>
 		<!-- 시험 문제 추가 모달 버튼 -->
@@ -61,11 +75,11 @@
 		        
 		          <div class="mb-3">
 		            <label for="recipient-name" class="col-form-label">시험 번호</label>
-		            <input type="text" name="testNo" class="form-control" id="testNo" value="${testNo}" readonly="readonly" >
+		            <input type="text" name="testNo" class="form-control" id="testNo" value="" readonly="readonly" >
 		          </div>
 		          <div class="mb-3">
 		            <label for="recipient-name" class="col-form-label">시험 제목</label>
-		            <input type="text" name="testTitle" class="form-control" id="testTitle" value="${testTitle}" readonly="readonly" >
+		            <input type="text" name="testTitle" class="form-control" id="testTitle" value="" readonly="readonly" >
 		          </div>
 		          <div class="mb-3">
 		            <label for="recipient-name" class="col-form-label">문제 번호</label>

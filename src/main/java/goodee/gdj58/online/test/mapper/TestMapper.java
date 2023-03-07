@@ -5,8 +5,6 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import goodee.gdj58.online.vo.Example;
-import goodee.gdj58.online.vo.Question;
 import goodee.gdj58.online.vo.Test;
 
 @Mapper
@@ -15,7 +13,7 @@ public interface TestMapper {
 	int deleteTest(int testNo, int teacherNo);
 	//시험 수정
 	int updateTest(Map<String, Object> paramMap);
-	//시험 상세보기 
+	//시험 상세보기 List<Map<String, Object>>: 키값이 아닌, 데이터를 이용한 정렬
 	List<Map<String, Object>> selecTestOne(int testNo);
 	//test 추가
 	int insertTest(Test test);

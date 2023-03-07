@@ -29,20 +29,19 @@
 	</insert>
 	
 	<!-- 보기 리스트 -->
-	<select id="selectExampleList" 
-			resultType="java.util.Map"
-			parameterType="int">
+	<select id="testByEList" resultType="java.util.Map" parameterType="int">
 		<!-- resultType : 조회 결과 값을 저장하기 위한 데이터 타입(데이터 하나에 대한 타입 지정)
 			 paramterType : 전달받은 파라이터 데이터 타입 지정(선택적)-->
 		SELECT 
-			e.example_no eNo
+			q.question_no qNO
+			, e.example_no eNO
 			, e.example_idx eIdx
 			, e.example_title eTitle
-			, e.answer_ox eOx
-			, q.question_idx qIdx
-		FROM example e INNER JOIN question q
-		ON e.question_no=q.question_no
-		WHERE question_idx=#{questionIdx}
+			, e.answer_ox eOX
+		FROM question q 
+		INNER JOIN example e ON q.question_no= e.question_no
+		WHERE q.question_no=#{questionNo} AND q.test_no=#{testNo}
+
 	</select>
 	
 </mapper>

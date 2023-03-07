@@ -42,13 +42,8 @@ public class QuestionService {
 		return questionMapper.insertQuestion(question);
 	}
 	
-	//시험리스트: 페이징 해야 해?
-	public List<Question> getQuestionList(int currentPage, int rowPerPage){
-		//시작페이지
-		int beginRow = (currentPage-1)*rowPerPage;
-		Map<String, Object> paramMap= new HashMap<String, Object>();
-		paramMap.put("beginRow", beginRow);
-		paramMap.put("rowPerPage", rowPerPage);
-		return questionMapper.selecQuestionList(paramMap);
+	//testone에서 문제,보기 리스트 
+	public List<Map<String, Object>> getTestQList(int testNo){
+		return questionMapper.testByQList(testNo);
 	}
 }
