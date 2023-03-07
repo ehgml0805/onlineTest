@@ -34,8 +34,8 @@ public class QuestionService {
 	}
 	
 	//시험 삭제
-		public int removeQuestion(int questionNo) {
-			return questionMapper.deleteQuestion(questionNo);
+		public int removeQuestion(int questionNo, int testNo) {
+			return questionMapper.deleteQuestion(questionNo, testNo);
 		}
 	//시험 추가
 	public int addQuestion(Question question) {

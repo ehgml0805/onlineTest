@@ -49,25 +49,24 @@ public class QuestionController {
 		int row=questionService.modifyQuestion(question);
 		log.debug("문제 수정 성공");
 		
-		return "teacher/testOne";
+		return "teacher/testOne?testNo="+testNo+"";
 		
 	}
 	
-	//시험 삭제
+	//시험 문제 삭제
 	@GetMapping("teacher/removeQuestion")
-	public String removeQuestion(HttpSession session, @RequestParam("questionNo") int questionNo) {
-		questionService.removeQuestion(questionNo);
+	public String removeQuestion(HttpSession session, @RequestParam("questionNo") int questionNo
+									, @RequestParam(value = "testNo") int testNo) {
 		
-		return "redirect:/teacher/testList";
+		questionService.removeQuestion(questionNo, testNo);
+		
+		return "redirect:/teacher/testOne?testNo="+testNo+"";
 	}
 
 	//시험 입력
-	/*
-	 * @GetMapping("teacher/testList/addQuestion") public String
-	 * addQuestion(HttpSession session) { return "teacher/testList/addQuestion"; }
-	 */
 	@PostMapping("teacher/addQuestion")
-	public String addQuestion(HttpSession session, Question question) {
+	public String addQuestion(HttpSession session, Question question
+							, @RequestParam(value = "testNo") int testNo) {
 		int row=questionService.addQuestion(question);
 		if(row==0) {
 			System.out.println("시험 입력 실패!");
@@ -75,7 +74,7 @@ public class QuestionController {
 		}
 		log.debug("1");
 		System.out.println("시험 입력 성공");
-		return "teacher/testOne";
+		return "redirect:/teacher/testOne?testNo="+testNo+"";
 	}
 	
 }

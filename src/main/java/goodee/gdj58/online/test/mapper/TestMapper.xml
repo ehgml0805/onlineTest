@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goodee.gdj58.online.test.mapper.TestMapper">
+	<!-- test 삭제 -->
+	<delete id="deleteTest" parameterType="int">
+		DELETE FROM test
+		 WHERE test_no=#{testNo} AND teacher_no=#{teacherNo}
+	</delete>
+	
+	<!-- tset 수정 -->
+	<update id="updateTest" parameterType="java.util.Map">
+		
+		UPDATE test
+		SET test_title= #{testTitle}
+		WHERE test_no=#{testNo} AND teacher_no=#{teacherNo}
+	
+	</update>
 	
 	<!-- test One -->
 	<select id="selecTestOne" 
@@ -17,7 +31,7 @@
 	<insert id="insertTest" parameterType="goodee.gdj58.online.vo.Test">
 		
 		INSERT INTO test
-			 (test_title, test_date, teacher_no )
+			 (test_title , test_date, teacher_no )
 		VALUES
 			(#{testTitle}, CURDATE(), #{teacherNo})
 	
@@ -61,7 +75,7 @@
 			t.test_no testNo
 			, t.test_title testTitle
 			, t.test_date testDate
-			, tc.teacher_id teacher
+			, tc.teacher_id teacherNo
 		FROM test t INNER JOIN teacher tc ON t.teacher_no=tc.teacher_no
 		<where>
 			<if test="searchWord != null || searchWord != '' ">

@@ -1,6 +1,5 @@
 package goodee.gdj58.online.test.controller;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import goodee.gdj58.online.test.service.ExampleService;
 import goodee.gdj58.online.test.service.TestService;
 import goodee.gdj58.online.vo.Example;
+import goodee.gdj58.online.vo.Teacher;
 import goodee.gdj58.online.vo.Test;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,6 +24,28 @@ import lombok.extern.slf4j.Slf4j;
 public class TestController {
 	@Autowired TestService testService;
 	@Autowired ExampleService exampleService;
+	//test삭제
+	@GetMapping("teacher/removeTest")
+	public String removeTest(HttpSession session, @RequestParam("testNo") int testNo) {
+		Teacher loginTeacher = (Teacher)session.getAttribute("loginTeacher");
+		int teacherNo=loginTeacher.getTeacherNo();
+		testService.deleteTest(testNo, teacherNo);
+		return "redirect:/teacher/testList";
+		
+	}
+	
+	//test수정
+	@PostMapping("teacher/modefyTest")
+	public String modefyTest(HttpSession session, 
+							@RequestParam(value = "testTitle") String testTitle, 
+							@RequestParam(value ="testNo") int testNo) {
+		Teacher loginTeacher = (Teacher)session.getAttribute("loginTeacher");
+		int teacherNo=loginTeacher.getTeacherNo();
+		
+		testService.modefyTest(testNo, teacherNo, testTitle);
+		return "redirect:/teacher/testList";
+	}
+	
 	//tsetOne 상세보기
 	@GetMapping("teacher/testOne")
 	public String testOne(HttpSession session, Model model, int testNo, Example example) {
@@ -32,17 +54,12 @@ public class TestController {
 		List<Map<String, Object>> tQList=testService.getTestOne(testNo);
 		model.addAttribute("tQList", tQList);
 		model.addAttribute("testNo", testNo);
-		/*
-		 * for(Map<String, Object> qm: tQList) { int qIdx=(int) qm.get("qIdx");
-		 * System.out.println(qIdx+"<---qIdx");
-		 * 
-		 * List<Example> eList=exampleService.getExampleList(qIdx);
-		 * //null,null,null,null 뜬다 왜...? System.out.println(eList+"<---eList");
-		 * model.addAttribute("eList", eList); }
-		 */
+	
 		//testOne에서 질문 목록 출력
 		for(Map<String, Object> qm: tQList) { 
 			int qIdx=(int) qm.get("qIdx");
+			String testTitle=(String)qm.get("testTitle");
+			model.addAttribute("testTitle", testTitle);
 			System.out.println(qIdx+"<---qIdx");
 			List<Map<String, Object>> eList=exampleService.getExampleList(qIdx);
 			if(eList.isEmpty()) { //보기가 없을때 
@@ -129,6 +146,9 @@ public class TestController {
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("endPage", endPage);
+		Teacher loginTeacher=(Teacher)session.getAttribute("loginTeacher");
+		int teacherNo=loginTeacher.getTeacherNo();
+		model.addAttribute("teacherNo", teacherNo);
 		return "teacher/testList";
 	}
 }

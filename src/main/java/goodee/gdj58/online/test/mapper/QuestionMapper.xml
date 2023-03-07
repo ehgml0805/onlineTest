@@ -21,7 +21,8 @@
 	<!-- 문제 삭제 -->
 	<delete id="deleteQuestion" parameterType="int">
 			
-		DELETE FROM question WHERE question_no = #{questionNo} AND test_no = #{testNo}
+		DELETE FROM question 
+		WHERE question_no = #{questionNo} AND test_no = #{testNo}
 	
 	</delete>
 	

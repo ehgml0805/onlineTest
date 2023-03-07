@@ -18,7 +18,19 @@ import goodee.gdj58.online.vo.Test;
 public class TestService {
 	//DI = new 연산자 역할
 	@Autowired private TestMapper testMapper;
+	//test 삭제
+	public int deleteTest(int testNo, int teacherNo) {
+		return testMapper.deleteTest(testNo, teacherNo);
+	}
 	
+	//test 수정
+	public int modefyTest(int testNo, int teacherNo ,String testTitle) {
+		Map<String, Object> paramMap=new HashMap<String, Object>();
+		paramMap.put("testNo", testNo);
+		paramMap.put("teacherNo", teacherNo);
+		paramMap.put("testTitle", testTitle);
+		return testMapper.updateTest(paramMap);
+	}
 
 	//tsetOne 상세보기 
 	public List<Map<String, Object>> getTestOne(int testNo) {

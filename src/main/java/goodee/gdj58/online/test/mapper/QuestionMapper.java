@@ -13,7 +13,7 @@ public interface QuestionMapper {
 	//문제 상세보기
 	Question questionOne(int questionNo);
 	//문제 삭제
-	int deleteQuestion(int questionNo);
+	int deleteQuestion(int questionNo, int testNo);
 	//시험추가
 	int insertQuestion(Question question);
 	//test ->question 문제 리스트 
