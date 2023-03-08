@@ -133,7 +133,7 @@
 		</c:if>
 		
 		<!-- 페이지 숫자 10개씩 보이게 -->
-		<c:forEach var="num" begin="${startPage}" end="${endPage}">
+		<c:forEach var="num" begin="${startPage}" end="${endPage}" step="1">
 			<c:if test="${num == currentPage}">
 				<a href="${pageContext.request.contextPath}/teacher/testList?currentPage=${num}&searchWord=${searchWord}">${num}</a>
 			</c:if>
@@ -142,7 +142,7 @@
 				<a href="${pageContext.request.contextPath}/teacher/testList?currentPage=${num}&searchWord=${searchWord}">${num}</a>
 			</c:if>
 		</c:forEach>
-
+		
 		<c:if test="${currentPage<lastPage}">
 			<!--현재 페이지가 마지막 페이지보다 작을 때  -->
 			<a href="${pageContext.request.contextPath}/teacher/testList?currentPage=${currentPage+1}&searchWord=${searchWord}">다음</a>
