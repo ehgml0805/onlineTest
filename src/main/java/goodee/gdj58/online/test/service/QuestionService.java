@@ -21,25 +21,22 @@ public class QuestionService {
 	//변수 타입은 mapper에서 쓴 타입과 동일해야 함
 	//보기 수정
 	public int modifyQuestion(Question question) {
-		Map<String,Object> paramMap= new HashMap<String, Object>();
-		paramMap.put("test_no", question.getTestNo());
-		paramMap.put("question_idx", question.getQuestionIdx());
-		paramMap.put("question_title", question.getQuestionTitle());
-		
-		return questionMapper.updateQuestion(paramMap);
+		questionMapper.updateQuestion(question);
+		return question.getQuestionNo();
 	}
 	//문제 상세보기
-	public Question getQuestionOne(int questionNo) {
+	public List<Map<String, Object>> getQuestionOne(int questionNo) {
 		return questionMapper.questionOne(questionNo);
 	}
 	
 	//시험 삭제
-		public int removeQuestion(int questionNo, int testNo) {
-			return questionMapper.deleteQuestion(questionNo, testNo);
+		public int removeQuestion(int questionNo,int teacherNo) {
+			return questionMapper.deleteQuestion(questionNo, teacherNo);
 		}
 	//시험 추가
 	public int addQuestion(Question question) {
-		return questionMapper.insertQuestion(question);
+		questionMapper.insertQuestion(question);
+		return question.getQuestionNo();
 	}
 	
 	//testone에서 문제,보기 리스트 

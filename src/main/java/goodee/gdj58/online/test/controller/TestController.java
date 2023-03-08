@@ -67,8 +67,6 @@ public class TestController {
 			model.addAttribute("qTitle", questionTitle);
 			int questionNo=(int) qm.get("qNo");
 			model.addAttribute("qNo", questionNo);
-			Question qOne=questionService.getQuestionOne(questionNo);
-			//System.out.println(qOne);
 			//헤당 테스트의 해당 문제의 보기 리스트
 			List<Map<String, Object>> EList =exampleService.getTestEList(questionIdx);
 			
@@ -77,7 +75,6 @@ public class TestController {
 				
 			}else {
 			model.addAttribute("EList", EList); 
-			model.addAttribute("qOne", qOne); 
 			}
 		}
 		

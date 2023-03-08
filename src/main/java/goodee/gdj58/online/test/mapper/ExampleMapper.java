@@ -10,9 +10,9 @@ import goodee.gdj58.online.vo.Example;
 @Mapper
 public interface ExampleMapper {
 	//보기 수정
-	int updateExample (Map<String, Object> paramMap);
+	int updateExample(Example example);
 	//보기 삭제
-	int deleteExample(int exampleNo);
+	int deleteExample(int exampleNo,int questionNo,int teacherNo );
 	//보기 추가
 	int insertExample(Example example);
 	//보기 출력 testone에서 보기 리스트 List<Map<String, Object>>: 키값이 아닌, 데이터를 이용한 정렬

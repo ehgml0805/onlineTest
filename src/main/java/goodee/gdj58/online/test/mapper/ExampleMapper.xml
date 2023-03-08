@@ -7,31 +7,26 @@
 			
 		UPDATE example 
 		SET example_idx = #{exampleIdx} , example_title =#{exampleTitle} , answer_ox = #{answerOx}
-		WHERE question_no = #{questionNo} AND example_no = #{exampleNo}
+		WHERE example_no = #{exampleNo}
 	
 	</update>
 	
 	<!-- 보기 삭제 -->
 	<delete id="deleteExample" parameterType="int">
 			
-		DELETE FROM example WHERE question_no = #{questionNo} AND example_no = #{exampleNo}
+		DELETE FROM example WHERE  example_no = #{exampleNo} AND question_no = #{questionNo} AND teacher_no=#{teacherNo} 
 	
 	</delete>
 	
 	<!-- 보기 추가 -->
-	<insert id="insertExample" parameterType="goodee.gdj58.online.vo.Example">
+	<insert id="insertExample"  parameterType="java.util.Map">
 			
 		INSERT INTO example
 			(question_no, example_idx, example_title, answer_ox)
-		VALUES
-     	<foreach collection="list" item="item" separator=",">
-            (
-            	#{item.questionNo}
-            	, #{item.exampleIdx}
-            	, #{item.exampleTitle}
-            	, #{item.answerOx}
-            )
-        </foreach>
+		VALUES (#{questionNo}, #{exampleIdx}, #{exampleTitle}, #{answerOx})
+     	<!-- <foreach collection="list" item="item" separator=" , ">
+            (#{item.questionNo}, #{item.exampleIdx}, #{item.exampleTitle}, #{item.answerOx})
+        </foreach> -->
 	
 	</insert>
 	
@@ -39,16 +34,16 @@
 	<select id="testByEList" resultType="java.util.Map" parameterType="int">
 		<!-- resultType : 조회 결과 값을 저장하기 위한 데이터 타입(데이터 하나에 대한 타입 지정)
 			 paramterType : 전달받은 파라이터 데이터 타입 지정(선택적)-->
-		SELECT 
+		<!-- SELECT 
 			 example_no eNO
 			 , question_no qNo
 			 , example_idx eIdx
 			 , example_title eTitle
 			 , answer_ox eOX
 		FROM example  
-		WHERE question_no=#{questionNo}
+		WHERE question_no=#{questionNo} -->
 		
-		<!-- SELECT 
+		SELECT 
 			q.question_no qNO
 			, q.question_idx qIdx
 			, e.example_no eNO
@@ -57,7 +52,8 @@
 			, e.answer_ox eOX
 		FROM question q 
 		INNER JOIN example e ON q.question_no= e.question_no
-		WHERE q.question_idx=#{questionIdx} -->
+		WHERE q.question_idx=#{questionIdx}
+		ORDER BY example_idx ASC
 
 	</select>
 	

@@ -3,30 +3,36 @@
 <mapper namespace="goodee.gdj58.online.test.mapper.QuestionMapper">
 	
 	<!-- 문제 수정 -->
-	<update id="updateQuestion" parameterType="java.util.Map">
+	<update id="updateQuestion" parameterType="goodee.gdj58.online.vo.Question">
 			
 		UPDATE question 
-		SET test_no = #{testNo} , question_idx =#{questionIdx} , question_title = #{questionTitle}
-		WHERE question_no = #{questionNo} AND test_no = #{testNo}
+		SET question_idx =#{questionIdx} , question_title = #{questionTitle}
+		WHERE question_no = #{questionNo}
 	
 	</update>
 	
-	
-	<select id="questionOne" parameterType="int" resultType="goodee.gdj58.online.vo.Question">
+	<!-- 시험 상세보기 -->
+	<select id="questionOne" parameterType="int" resultType="java.util.Map">
 	
 		SELECT 
-			test_no testNo
-			, question_no qNo
-			, question_idx qIdx
-			, question_title qTitle
-		FROM question WHERE question_no=#{questionNo} AND test_no = #{testNo}
+			q.test_no testNo
+			, q.question_no qNo
+			, q.question_idx qIdx
+			, q.question_title qTitle
+			, e.example_no eNo
+			, e.example_idx eIdx
+			, e.example_title eTitle
+			, e.answer_ox eOx
+		FROM question q
+		INNER JOIN example e ON q.question_no=e.question_no
+		WHERE q.question_no=#{questionNo}
 		
 	</select> 
 	<!-- 문제 삭제 -->
 	<delete id="deleteQuestion" parameterType="int">
 			
 		DELETE FROM question 
-		WHERE question_no = #{questionNo} AND test_no = #{testNo}
+		WHERE question_no = #{questionNo} AND teacher_no=#{teacherNo}
 	
 	</delete>
 	

@@ -20,26 +20,20 @@ public class ExampleService {
 	//변수 타입은 mapper에서 쓴 타입과 동일해야 함
 	//보기 수정
 	public int modifyExample(Example example) {
-		Map<String,Object> paramMap= new HashMap<String, Object>();
-		paramMap.put("question_no", example.getQuestionNo());
-		paramMap.put("example_idx", example.getExampleIdx());
-		paramMap.put("example_title", example.getExampleTitle());
-		paramMap.put("answer_ox", example.getAnswerOx());
-		
-		return exampleMapper.updateExample(paramMap);
+		return exampleMapper.updateExample(example);
 	}
 	
 	//보기 삭제
-	public int removeExample(int exampleNo) {
-		return exampleMapper.deleteExample(exampleNo);
+	public int removeExample(int exampleNo,int questionNo,int teacherNo ) {
+		return exampleMapper.deleteExample(exampleNo, questionNo, teacherNo);
 	}
 	
-	//보기 추가
+	//문제 추가 -> 보기 추가
 	public int addExample(Example example) {
 		return exampleMapper.insertExample(example);
 	}
 	
-	//문제의 보기
+	//해당 테스트의 문제의 보기
 	public List<Map<String, Object>> getTestEList(int questionIdx){
 		return exampleMapper.testByEList(questionIdx);
 	}
