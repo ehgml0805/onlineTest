@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import goodee.gdj58.online.test.service.ExampleService;
 import goodee.gdj58.online.test.service.QuestionService;
 import goodee.gdj58.online.test.service.TestService;
-import goodee.gdj58.online.vo.Example;
+import goodee.gdj58.online.vo.Question;
 import goodee.gdj58.online.vo.Teacher;
 import goodee.gdj58.online.vo.Test;
 import lombok.extern.slf4j.Slf4j;
@@ -51,35 +51,36 @@ public class TestController {
 	//tsetOne 상세보기
 	@GetMapping("teacher/testOne")
 	public String testOne(HttpSession session, Model model, int testNo) {
-		
+		//테스트 상세보기
 		List<Map<String, Object>> testOne =testService.getTestOne(testNo);
 		model.addAttribute("testOne", testOne);
+		
+		//해당 테스트의 문제 리스트
 		List<Map<String, Object>> QList =questionService.getTestQList(testNo);
 		model.addAttribute("QList", QList);
-		/*test 상세보기
-		List<Map<String, Object>> tQList=testService.getTestOne(testNo);
-		model.addAttribute("tQList", tQList);
-		model.addAttribute("testNo", testNo);*/
 	
 		//testOne에서 질문 목록 출력
 		for(Map<String, Object> qm: QList) { 
-			int questionNo=(int) qm.get("questionNo");
-			List<Map<String, Object>> EList =exampleService.getTestEList(questionNo, testNo);
-			String testTitle=(String)qm.get("testTitle");
-			model.addAttribute("testTitle", testTitle);
-		}
-			/*
-			List<Map<String, Object>> eList=exampleService.getExampleList(qIdx);
-			if(eList.isEmpty()) { //보기가 없을때 
-				String meg="보기가 없습니다.";
-				System.out.println("보기가 없습니다.");
-				model.getAttribute(meg);
+			int questionIdx=(int) qm.get("qIdx");
+			model.addAttribute("qIdx", questionIdx);
+			String questionTitle=(String) qm.get("qTitle");
+			model.addAttribute("qTitle", questionTitle);
+			int questionNo=(int) qm.get("qNo");
+			model.addAttribute("qNo", questionNo);
+			Question qOne=questionService.getQuestionOne(questionNo);
+			//System.out.println(qOne);
+			//헤당 테스트의 해당 문제의 보기 리스트
+			List<Map<String, Object>> EList =exampleService.getTestEList(questionIdx);
+			
+			if(EList.isEmpty()) { //보기가 없을때 
+				System.out.println(questionIdx+"문제의 보기가 없습니다.");
+				
 			}else {
-			System.out.println(eList+"<---eList");
-			model.addAttribute("eList", eList); 
+			model.addAttribute("EList", EList); 
+			model.addAttribute("qOne", qOne); 
 			}
 		}
-		*/
+		
 		return "teacher/testOne";
 	}
 		

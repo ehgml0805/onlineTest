@@ -69,7 +69,7 @@
 				<td>
 					<a href="${pageContext.request.contextPath}/teacher/testOne?testNo=${t.testNo}">${t.testTitle}</a>
 				</td>
-				<td>${t.teacherNo}</td>
+				<td>${t.teacherId}</td>
 				<td>${t.testDate}</td>
 				<td>
 					<a data-bs-toggle="modal" data-bs-target="#testModefyModal" 
@@ -131,9 +131,16 @@
 			<!-- 현재 페이지가 1보다 클 경우에만  -->
 			<a href="${pageContext.request.contextPath}/teacher/testList?currentPage=${currentPage-1}&searchWord=${searchWord}">이전</a>
 		</c:if>
+		
 		<!-- 페이지 숫자 10개씩 보이게 -->
-		<c:forEach var="num" begin="${startPage}" end="${endPage}" step="1">
-			<a href="${pageContext.request.contextPath}/teacher/testList?currentPage=${num}">${num}</a>
+		<c:forEach var="num" begin="${startPage}" end="${endPage}">
+			<c:if test="${num == currentPage}">
+				<a href="${pageContext.request.contextPath}/teacher/testList?currentPage=${num}&searchWord=${searchWord}">${num}</a>
+			</c:if>
+			
+			<c:if test="${num != currentPage}">
+				<a href="${pageContext.request.contextPath}/teacher/testList?currentPage=${num}&searchWord=${searchWord}">${num}</a>
+			</c:if>
 		</c:forEach>
 
 		<c:if test="${currentPage<lastPage}">

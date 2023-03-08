@@ -10,7 +10,7 @@ import goodee.gdj58.online.vo.Question;
 public interface QuestionMapper {
 	//문제 수정
 	int updateQuestion(Map<String,Object> paramMap);
-	//문제 상세보기 안쓸듯
+	//문제 상세보기
 	Question questionOne(int questionNo);
 	//문제 삭제
 	int deleteQuestion(int questionNo, int testNo);

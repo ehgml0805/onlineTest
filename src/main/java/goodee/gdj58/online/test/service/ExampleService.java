@@ -40,7 +40,7 @@ public class ExampleService {
 	}
 	
 	//문제의 보기
-	public List<Map<String, Object>> getTestEList(int questionNo, int testNo){
-		return exampleMapper.testByEList(questionNo, testNo);
+	public List<Map<String, Object>> getTestEList(int questionIdx){
+		return exampleMapper.testByEList(questionIdx);
 	}
 }

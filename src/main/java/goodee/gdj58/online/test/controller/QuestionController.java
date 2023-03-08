@@ -70,7 +70,7 @@ public class QuestionController {
 		int row=questionService.addQuestion(question);
 		if(row==0) {
 			System.out.println("시험 입력 실패!");
-			return "redirect:/test/example/addQuestion";
+			return "redirect:/teacher/testOne?testNo="+testNo+"";
 		}
 		log.debug("1");
 		System.out.println("시험 입력 성공");

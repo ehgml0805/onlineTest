@@ -74,14 +74,14 @@
 			t.test_no testNo
 			, t.test_title testTitle
 			, t.test_date testDate
-			, tc.teacher_id teacherNo
+			, tc.teacher_id teacherId
 		FROM test t INNER JOIN teacher tc ON t.teacher_no=tc.teacher_no
 		<where>
 			<if test="searchWord != null || searchWord != '' ">
 				test_title like CONCAT('%',#{searchWord},'%')
 			</if>
 		</where>
-		ORDER BY test_date ASC
+		ORDER BY test_date DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 

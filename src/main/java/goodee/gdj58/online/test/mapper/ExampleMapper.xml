@@ -22,9 +22,16 @@
 	<insert id="insertExample" parameterType="goodee.gdj58.online.vo.Example">
 			
 		INSERT INTO example
-			(question_no, example_idx, example_title , answer_ox)
+			(question_no, example_idx, example_title, answer_ox)
 		VALUES
-			(#{questionNo}, #{exampleIdx}, #{exampleTitle}, #{answerOx})
+     	<foreach collection="list" item="item" separator=",">
+            (
+            	#{item.questionNo}
+            	, #{item.exampleIdx}
+            	, #{item.exampleTitle}
+            	, #{item.answerOx}
+            )
+        </foreach>
 	
 	</insert>
 	
@@ -33,14 +40,24 @@
 		<!-- resultType : 조회 결과 값을 저장하기 위한 데이터 타입(데이터 하나에 대한 타입 지정)
 			 paramterType : 전달받은 파라이터 데이터 타입 지정(선택적)-->
 		SELECT 
+			 example_no eNO
+			 , question_no qNo
+			 , example_idx eIdx
+			 , example_title eTitle
+			 , answer_ox eOX
+		FROM example  
+		WHERE question_no=#{questionNo}
+		
+		<!-- SELECT 
 			q.question_no qNO
+			, q.question_idx qIdx
 			, e.example_no eNO
 			, e.example_idx eIdx
 			, e.example_title eTitle
 			, e.answer_ox eOX
 		FROM question q 
 		INNER JOIN example e ON q.question_no= e.question_no
-		WHERE q.question_no=#{questionNo} AND q.test_no=#{testNo}
+		WHERE q.question_idx=#{questionIdx} -->
 
 	</select>
 	
