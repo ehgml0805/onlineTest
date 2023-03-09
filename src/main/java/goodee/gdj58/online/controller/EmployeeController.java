@@ -24,12 +24,7 @@ public class EmployeeController {
 	@Autowired EmployeeService employeeService;
 	@Autowired IdService idService;
 	
-	//pw수정
-	@GetMapping("/employee/modifyEmpPw")
-	public String modifyEmpPw(HttpSession session) {
-		
-		return "employee/modifyEmpPw";
-	}
+	//pw수정 모달
 	@PostMapping("/employee/modifyEmpPw")
 	public String modifyEmpPw(HttpSession session
 								, @RequestParam(value = "oldPw") String oldPw
@@ -38,27 +33,29 @@ public class EmployeeController {
 		Employee loginEmp = (Employee)session.getAttribute("loginEmp");
 		
 		employeeService.updateEmployeePw(loginEmp.getEmpNo(), oldPw, newPw);
-		return "employee/empList";
+		return "redirect:/loginEmp";
 	}
 	
-	// 로그인
-	@GetMapping("/loginEmp") //요청 주소
+	// 홈
+	@GetMapping("/homeEmp") //요청 주소
 	public String loginEmp(HttpSession session) {
-		return "employee/loginEmp";
+		return "employee/homeEmp";
 	}
+	
+	//로그인
 	@PostMapping("/loginEmp")
 	public String loginEmp(HttpSession session, Employee emp) {
 		Employee resultEmp = employeeService.login(emp);
 		session.setAttribute("loginEmp", resultEmp);
 		System.out.println(resultEmp+"<==세션 저장 결과 값");
-		return "redirect:/loginEmp";
+		return "redirect:/homeEmp";
 	}
 	
 	//로그아웃
 	@GetMapping("/employee/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:/loginEmp";
+		return "redirect:/homeEmp";
 	}
 	
 	/*

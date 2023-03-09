@@ -29,7 +29,7 @@ public class EmpLoginFilter implements Filter {
 		HttpSession session = req.getSession();
 		
 		if(session.getAttribute("loginEmp") == null) {
-			((HttpServletResponse)response).sendRedirect(req.getContextPath()+"/loginEmp");
+			((HttpServletResponse)response).sendRedirect(req.getContextPath()+"/homeEmp");
 			return;
 		}
 	} else {

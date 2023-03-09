@@ -29,7 +29,7 @@ public class TeacherLoginFilter implements Filter{
 		HttpSession session = req.getSession();
 		
 		if(session.getAttribute("loginTeacher") == null) {
-			((HttpServletResponse)response).sendRedirect(req.getContextPath()+"/loginTeacher");
+			((HttpServletResponse)response).sendRedirect(req.getContextPath()+"/homeTeacher");
 			return;
 		}
 	} else {

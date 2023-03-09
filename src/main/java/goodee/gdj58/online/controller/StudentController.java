@@ -20,12 +20,8 @@ public class StudentController {
 	//DI = new 연산자 역할
 	@Autowired StudentService studentService;
 	@Autowired IdService idService;
+	
 	//학생이 pw수정
-	@GetMapping("/student/modifyStudentPw")
-	public String modifyStudentPw(HttpSession session) {
-		
-		return "student/modifyStudentPw";
-	}
 	@PostMapping("/student/modifyStudentPw")
 	public String modifyStudentPw(HttpSession session
 								, @RequestParam(value = "oldPw") String oldPw
@@ -100,28 +96,30 @@ public class StudentController {
 	}
 	
 	
-	//학생 로그인
-	@GetMapping("/loginStudent") //내가 주소창에 사용할 주소
+	//홈
+	@GetMapping("/homeStudent") //내가 주소창에 사용할 주소
 	public String loginStudent(HttpSession session) {
-		return "student/loginStudent"; //주소창 주소를 입력하면 보낼곳
+		return "student/homeStudent"; //주소창 주소를 입력하면 보낼곳
 	}
+	
+	//로그인
 	@PostMapping("/loginStudent")
 	public String loginStudent(HttpSession session, Student student) {
 		//service 호출
 		Student resultStudent = studentService.loginStudent(student);
 		//성공시 세션에 저장
-		System.out.println(resultStudent+"<==로그인 성공");
-		System.out.println("로그인 성공");
+		//System.out.println(resultStudent+"<==로그인 성공");
+		//System.out.println("로그인 성공");
 		session.setAttribute("loginStudent", resultStudent);
 		
-		return "redirect:/loginStudent";
+		return "redirect:/homeStudent";
 	}
 	
 	//로그아웃
 	@GetMapping("/student/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:/loginStudent";
+		return "redirect:/homeStudent";
 	}
 	/*
 	 * //학생 회원가입

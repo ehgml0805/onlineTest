@@ -21,11 +21,6 @@ public class TeacherController {
 	@Autowired IdService idService;
 	
 	//강사가 pw수정
-	@GetMapping("/teacher/modifyTeacherPw")
-	public String modifyTeacherPw(HttpSession session) {
-		
-		return "teacher/modifyTeacherPw";
-	}
 	@PostMapping("/teacher/modifyTeacherPw")
 	public String modifyTeacherPw(HttpSession session
 								, @RequestParam(value = "oldPw") String oldPw
@@ -103,24 +98,26 @@ public class TeacherController {
 	}
 
 	
-	// 로그인
-	@GetMapping("/loginTeacher") //요청 주소
+	// 홈
+	@GetMapping("/homeTeacher") //요청 주소
 	public String loginTeacher(HttpSession session) {
-		return "teacher/loginTeacher";
+		return "teacher/homeTeacher";
 	}
+	
+	//로그인
 	@PostMapping("/loginTeacher")
 	public String loginTeacher(HttpSession session, Teacher teacher) {
 		Teacher resultTeacher = teacherService.loginTeacher(teacher);
 		System.out.println("로그인 성공");
 		session.setAttribute("loginTeacher", resultTeacher);
 
-		return "redirect:/loginTeacher";
+		return "redirect:/homeTeacher";
 	}
 	
 	//로그아웃
 	@GetMapping("/teacher/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:/loginTeacher";
+		return "redirect:/homeTeacher";
 	}
 }
