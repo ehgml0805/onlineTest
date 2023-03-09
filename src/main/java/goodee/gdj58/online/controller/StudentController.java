@@ -78,7 +78,7 @@ public class StudentController {
 		if(selectCount/rowPerPage !=0) {
 			lastPage=lastPage+1;
 		}
-		int startPage=((currentPage-1)*rowPerPage)*rowPerPage+1;
+		int startPage=((currentPage - 1)/rowPerPage) * rowPerPage + 1;
 		int endPage=startPage+rowPerPage-1;
 		if(endPage>lastPage) {
 			endPage=lastPage;

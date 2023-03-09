@@ -30,9 +30,9 @@
 	<insert id="insertTest" parameterType="goodee.gdj58.online.vo.Test">
 		
 		INSERT INTO test
-			 (test_title , test_date, teacher_no )
+			 (test_title , test_date, teacher_no , test_end_date)
 		VALUES
-			(#{testTitle}, CURDATE(), #{teacherNo})
+			(#{testTitle}, CURDATE(), #{teacherNo}, #{testEndDate})
 	
 	</insert>
 	
@@ -47,33 +47,32 @@
 	</select>
 	
 	<!--학생 test List -->
-	<select id="selecTestListBystudent" 
-			parameterType="goodee.gdj58.online.vo.Test"
-			resultType="java.util.Map">
-		
-		SELECT 
-			test_no testNo
-			, test_title testTitle
-			, test_date testDate
-		FROM test 
-		<where>
-			<if test="searchWord != null || searchWord != '' ">
-				test_title like CONCAT('%',#{searchWord},'%')
-			</if>
-		</where>
-		ORDER BY test_date ASC
-		LIMIT #{beginRow}, #{rowPerPage}
-	</select>
-	
-	<!--강사 test List -->
-	<select id="selecTestList" 
-			parameterType="goodee.gdj58.online.vo.Test"
-			resultType="java.util.Map">
+	<select id="selecTestListBystudent" parameterType="goodee.gdj58.online.vo.Test" resultType="java.util.Map">
 		
 		SELECT 
 			t.test_no testNo
 			, t.test_title testTitle
 			, t.test_date testDate
+			, t.test_end_date endDate
+			, tc.teacher_name teacherName
+		FROM test t INNER JOIN teacher tc ON t.teacher_no=tc.teacher_no
+		<where>
+			<if test="searchWord != null || searchWord != '' ">
+				test_title like CONCAT('%',#{searchWord},'%')
+			</if>
+		</where>
+		ORDER BY test_end_date DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<!--강사 test List -->
+	<select id="selecTestList" parameterType="goodee.gdj58.online.vo.Test" resultType="java.util.Map">
+		
+		SELECT 
+			t.test_no testNo
+			, t.test_title testTitle
+			, t.test_date testDate
+			, t.test_end_date endDate
 			, tc.teacher_id teacherId
 		FROM test t INNER JOIN teacher tc ON t.teacher_no=tc.teacher_no
 		<where>

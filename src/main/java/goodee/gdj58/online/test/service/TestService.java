@@ -46,14 +46,14 @@ public class TestService {
 	public int selectCount(String searchword) {
 		return testMapper.selectCount(searchword);
 	}
-	//강사 tsetList 
+	//학생 tsetList 
 	public List<Test> getTestListByStudent(int currentPage, int rowPerPage, String searchWord ){
 		int beginRow = (currentPage-1)*rowPerPage; //0변부터 출력할 거~ rowPwePage 개수만큼 출력
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("beginRow", beginRow);
 		paramMap.put("rowPerPage", rowPerPage);
 		paramMap.put("searchWord", searchWord);
-		return testMapper.selecTestList(paramMap);
+		return testMapper.selecTestListBystudent(paramMap);
 	}
 	//강사 tsetList 
 	public List<Test> getTestList(int currentPage, int rowPerPage, String searchWord ){

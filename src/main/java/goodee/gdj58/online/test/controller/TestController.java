@@ -48,7 +48,7 @@ public class TestController {
 		return "redirect:/teacher/testList";
 	}
 	
-	//tsetOne 상세보기
+	//강사가 tsetOne 상세보기
 	@GetMapping("teacher/testOne")
 	public String testOne(HttpSession session, Model model, int testNo) {
 		//테스트 상세보기
@@ -107,14 +107,14 @@ public class TestController {
 		if(selectCount/rowPerPage !=0) {
 			lastPage=lastPage+1;
 		}
-		int startPage=((currentPage-1)*rowPerPage)*rowPerPage+1;
+		int startPage=((currentPage - 1)/rowPerPage) * rowPerPage + 1;
 		int endPage=startPage+rowPerPage-1;
 		if(endPage>lastPage) {
 			endPage=lastPage;
 		}
 		
-		List<Test> tList= testService.getTestList(currentPage, rowPerPage, searchWord);
-		model.addAttribute("tList", tList);
+		List<Test> stList= testService.getTestListByStudent(currentPage, rowPerPage, searchWord);
+		model.addAttribute("stList", stList);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("searchWord", searchWord);
 		
@@ -139,7 +139,7 @@ public class TestController {
 			lastPage=lastPage+1;
 		}
 		//int startPage=((currentPage-1)*rowPerPage)*rowPerPage+1;
-		int startPage=(currentPage-1)*rowPerPage+1;
+		int startPage=((currentPage - 1)/rowPerPage) * rowPerPage + 1;
 		int endPage=startPage+rowPerPage-1;
 		if(endPage>lastPage) {
 			endPage=lastPage;
