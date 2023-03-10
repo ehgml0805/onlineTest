@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>EMP 홈</title>
 </head>
 <body>
 	<!-- empMenu include -->

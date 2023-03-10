@@ -5,19 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-		rel="stylesheet"
-		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-		crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 </head>
 
 <body>
-	<div class="container">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 				
 			<div class="container-fluid">
-				<a class="navbar-brand" href="#"></a>
+				<a class="navbar-brand" href="#">${loginEmp.empName}</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
 					aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -28,7 +24,7 @@
 						<!-- 로그인 안되어 있으면  -->
 						<c:if test="${loginEmp == null}">
 							<!-- 로그인 모달 버튼 -->
-							<a class="nav-link" href="loginModal" data-bs-toggle="modal" data-bs-target="#EmpLoginModal">관리자로그인</a>
+							<a class="nav-link" href="loginModal" data-bs-toggle="modal" data-bs-target="#EmpLoginModal" style="">관리자로그인</a>
 							
 							<!-- 로그인 모달 내부 -->
 							<div class="modal fade" id="EmpLoginModal" tabindex="-1" aria-labelledby="empModalLabel" aria-hidden="true">
@@ -187,7 +183,7 @@
 			<form class="d-flex">
 				<input class="form-control me-2" type="search" placeholder="Search"
 					aria-label="Search">
-				<button class="btn btn-outline-success" type="submit">Search</button>
+				<button class="btn btn-secondary" type="submit">Search</button>
 			</form>
 		</nav>
 	</div>
@@ -289,7 +285,6 @@
     	 oldPwInput.focus()
      })
      
-
 </script>
 	
 	

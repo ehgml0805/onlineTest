@@ -5,58 +5,70 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>EMP 강사관리</title>
 </head>
 <body>
 	<!-- empMenu include -->
 	<div>
 		<c:import url="/WEB-INF/view/employee/inc/empMenu.jsp"></c:import>
 	</div>
-	<h1>Employee List</h1>
-	<a href="${pageContext.request.contextPath}/employee/teacher/addTeacher">강사등록</a>
-	<table>
-		<tr>
-			<th>teacherId</th>
-			<th>teacherName</th>
-			<th>삭제</th>
-		</tr>
-		<c:forEach var="t" items="${tList}">
-			<tr>
-				<td>${t.teacherId}</td>
-				<td>${t.teacherName}</td>
-				<td>
-					<a href="${pageContext.request.contextPath}/employee/teacher/removeTeacher?studentNo=${t.teacherNo}">
-						삭제
-					</a>
-				</td> 
+	<div class="container" style="margin-top: 50px">
+		<h1>Teacher List</h1>
+		<a href="${pageContext.request.contextPath}/employee/teacher/addTeacher">강사등록</a>
+		<table class="table table-hover" style="text-align: center;">
+			<tr class="table-dark">
+				<th scope="col">teacherId</th>
+				<th scope="col">teacherName</th>
+				<th scope="col">삭제</th>
 			</tr>
-		</c:forEach>
-	</table>
-	
-	
-	<!-- 검색 -->
-	<form action="${pageContext.request.contextPath}/employee/teacher/teacherList" method="get">
-		이름: <input type="text" name="searchWord"> <button type="submit">검색</button>
-	</form>
-	
-	
-	<div>
-		<a href="${pageContext.request.contextPath}/employee/teacher/teacherList?currentPage=1">처음으로</a>
+			<c:forEach var="t" items="${tList}">
+				<tr class="table-light">
+					<td>${t.teacherId}</td>
+					<td>${t.teacherName}</td>
+					<td>
+						<a href="${pageContext.request.contextPath}/employee/teacher/removeTeacher?studentNo=${t.teacherNo}">
+							삭제
+						</a>
+					</td> 
+				</tr>
+			</c:forEach>
+		</table>
+		<div class="form-group">
+			<!-- 검색 -->
+			<form action="${pageContext.request.contextPath}/employee/teacher/teacherList" method="get">
+				<div class="input-group mb-4">
+					<input type="text" class="form-control" placeholder="검색어를 입력하세요!" aria-label="Recipient's username" aria-describedby="button-addon2" name="searchWord">
+					<button class="btn btn-primary" type="submit" id="button-addon2">Button</button>
+				</div>
+			</form>
+		</div>
+		<br>
 		
-		<c:if test="${currentPage>1}"><!-- 현재 페이지가 1보다 클 경우에만  -->
-			<a href="${pageContext.request.contextPath}/employee/teacher/teacherList?currentPage=${currentPage-1}">이전</a>
-		</c:if>
-		
-		<!-- 페이지 숫자 10개씩 보이게 -->
-		<c:forEach var="num" begin="${startPage}" end="${endPage}" step="1">
-			 <a href="${pageContext.request.contextPath}/employee/teacher/teacherList?currentPage=${num}">${num}</a>
-		</c:forEach>
-		
-		<c:if test="${currentPage<lastPage}"> <!--현재 페이지가 마지막 페이지보다 작을 때  -->
-			<a href="${pageContext.request.contextPath}/employee/teacher/teacherList?currentPage=${currentPage+1}">다음</a>
-		</c:if>
-		
-		<a href="${pageContext.request.contextPath}/employee/teacher/teacherList?lastPage=${lastPage}&searchWord=${searchWord}">끝으로</a>
+		<div class="pagination" style="margin: auto;">
+			<a href="${pageContext.request.contextPath}/employee/teacher/teacherList?currentPage=1" class="page-link">처음으로</a>
+			
+			<c:if test="${currentPage>1}">
+				<!-- 현재 페이지가 1보다 클 경우에만  -->
+				<a href="${pageContext.request.contextPath}/employee/teacher/teacherList?currentPage=${currentPage-1}&searchWord=${searchWord}" class="page-link">&laquo;</a>
+			</c:if>
+			
+			<!-- 페이지 숫자 10개씩 보이게 -->
+			<c:forEach var="num" begin="${startPage}" end="${endPage}" step="1">
+				 <c:if test="${num == currentPage}">
+				 	<a href="${pageContext.request.contextPath}/employee/teacher/teacherList?currentPage=${num}&searchWord=${searchWord}" class="page-link" >${num}</a>
+				 </c:if>
+				 
+				 <c:if test="${num != currentPage}">
+				 	<a href="${pageContext.request.contextPath}/employee/teacher/teacherList?currentPage=${num}&searchWord=${searchWord}" class="page-link">${num}</a>
+				 </c:if>
+			</c:forEach>
+			
+			<c:if test="${currentPage<lastPage}"> <!--현재 페이지가 마지막 페이지보다 작을 때  -->
+				<a href="${pageContext.request.contextPath}/employee/teacher/teacherList?currentPage=${currentPage+1}&searchWord=${searchWord}" class="page-link">&raquo;</a>
+			</c:if>
+			
+			<a href="${pageContext.request.contextPath}/employee/teacher/teacherList?lastPage=${lastPage}&searchWord=${searchWord}" class="page-link">끝으로</a>
+		</div>
 	</div>
 </body>
 </html>

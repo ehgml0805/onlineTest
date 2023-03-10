@@ -13,32 +13,51 @@
 	<div>
 		<c:import url="/WEB-INF/view/employee/inc/empMenu.jsp"></c:import>
 	</div>
-	<h1>학생 추가</h1>
-	<div>
-		<input type="text" id="id"> 
-		<button type="button" id="ckBt">아이디 중복확인</button>
+	
+	<div class="container" style="margin-top: 50px; ">
+		<div class="card" style="width: 50rem; margin: auto;" >
+			<h3 class="card-header">학생 등록</h3>
+			<div class="card-body">
+				<div>
+					${errorMsg}
+				</div>
+				<div class="form-group row">
+					<div class="input-group mb-4">
+						<input type="text" id="id" placeholder="아이디를 입력하세요!" class="form-control" aria-describedby="button-addon2">
+						<button type="button" id="ckBt" class="btn btn-primary">아이디 중복확인</button>
+					</div>
+				</div>
+				
+				<div class="card-body">
+					<form method="post" action="${pageContext.request.contextPath}/employee/student/addStudent" id="addForm">
+						<div class="form-group row">
+							<label for="staticEmail" class="col-sm-2 col-form-label">StudentId</label>
+							<div class="col-sm-10">
+								<input type="text" name="StudentId" id="StudentId" readonly="readonly" class="form-control">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="staticEmail" class="col-sm-2 col-form-label">StudentPw</label>
+							<div class="col-sm-10">
+								<input type="text" name="StudentPw" id="StudentPw" class="form-control">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="staticEmail" class="col-sm-2 col-form-label">StudentName</label>
+							<div class="col-sm-10">
+								<input type="text" name="StudentName" id="StudentName" class="form-control">
+							</div>
+						</div>
+						<hr>
+						<div style="text-align: center;">
+							<button type="button" id="addBt" class="btn btn-primary">등록</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div>
-		${errorMsg}
-	</div>
-	<form method="post" action="${pageContext.request.contextPath}/employee/student/addStudent" id="addForm">
-		<table>
-			<tr>
-				<th>StudentId</th>
-				<td><input type="text" name="studentId"  id="studentId" readonly="readonly" ></td>
-			</tr>
-			<tr>
-				<th>StudentPw</th>
-				<td><input type="text" name="studentPw" id="studentPw"> </td>
-			</tr>
-			<tr>
-				<th>StudentName</th>
-				<td><input type="text" name="studentName" id="studentName"> </td>
-			</tr>
-		</table>
-		<button type="button" id="addBt">학생추가</button>
-	</form>
-</body>
+	
 <script>
 $('#ckBt').click(function(){
 	console.log('중복확인 클릭');
@@ -83,4 +102,5 @@ $('#addBt').click(function() {
 });
 
 </script>
+</body>
 </html>

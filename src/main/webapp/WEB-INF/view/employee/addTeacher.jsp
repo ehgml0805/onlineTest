@@ -13,32 +13,50 @@
 	<div>
 		<c:import url="/WEB-INF/view/employee/inc/empMenu.jsp"></c:import>
 	</div>
-	<h1>강사 추가</h1>
-	<div>
-		<input type="text" id="id"> 
-		<button type="button" id="ckBt">아이디 중복확인</button>
+	<div class="container" style="margin-top: 50px; ">
+		<div class="card" style="width: 50rem; margin: auto;" >
+			<h3 class="card-header">강사 등록</h3>
+			<div class="card-body">
+				<div>
+					${errorMsg}
+				</div>
+				<div class="form-group row">
+					<div class="input-group mb-4">
+						<input type="text" id="id" placeholder="아이디를 입력하세요!" class="form-control" aria-describedby="button-addon2">
+						<button type="button" id="ckBt" class="btn btn-primary">아이디 중복확인</button>
+					</div>
+				</div>
+				
+				<div class="card-body">
+					<form method="post" action="${pageContext.request.contextPath}/employee/teacher/addTeacher" id="addForm">
+						<div class="form-group row">
+							<label for="staticEmail" class="col-sm-2 col-form-label">teacherId</label>
+							<div class="col-sm-10">
+								<input type="text" name="teacherId" id="teacherId" readonly="readonly" class="form-control">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="staticEmail" class="col-sm-2 col-form-label">teacherPw</label>
+							<div class="col-sm-10">
+								<input type="text" name="teacherPw" id="teacherPw" class="form-control">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="staticEmail" class="col-sm-2 col-form-label">teacherName</label>
+							<div class="col-sm-10">
+								<input type="text" name="teacherName" id="teacherName" class="form-control">
+							</div>
+						</div>
+						<hr>
+						<div style="text-align: center;">
+							<button type="button" id="addBt" class="btn btn-primary">등록</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div>
-		${errorMsg}
-	</div>
-	<form method="post" action="${pageContext.request.contextPath}/employee/teacher/addTeacher" id="addForm">
-		<table>
-			<tr>
-				<td>teacherId</td>
-				<td><input type="text" name="teacherId" id="teacherId" readonly="readonly"></td>
-			</tr>
-			<tr>
-				<td>teacherPw</td>
-				<td><input type="password" name="teacherPw" id="teacherPw"></td>
-			</tr>
-			<tr>
-				<td>teacherName</td>
-				<td><input type="text" name="teacherName" id="teacherName"></td>
-			</tr>	
-		</table>
-		<button type="submit" id="addBt">강사추가</button>
-	</form>
-</body>
+
 <script>
 $('#ckBt').click(function(){
 	console.log('클릭');
@@ -83,4 +101,5 @@ $('#addBt').click(function() {
 });
 
 </script>
+</body>
 </html>
