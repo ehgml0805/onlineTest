@@ -5,19 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-		rel="stylesheet"
-		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-		crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/flatly/bootstrap.min.css" integrity="sha384-qF/QmIAj5ZaYFAeQcrQ6bfVMAh4zZlrGwTPY7T/M+iTTLJqJBJjwwnsE5Y0mV7QK" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 </head>
 
 <body>
-	<div class="container">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
-				
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="#"></a>
+				<a class="navbar-brand" href="#">${loginTeacher.teacherName}</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
 					aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -191,7 +186,6 @@
 				<button class="btn btn-outline-success" type="submit">Search</button>
 			</form>
 		</nav>
-	</div>
 	
 <script>
 	//관리자 로그인

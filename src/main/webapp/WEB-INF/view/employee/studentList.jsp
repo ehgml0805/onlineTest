@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>EMP 학생관리</title>
+<!-- 아이콘 -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 </head>
 <body>
 	<!-- empMenu include -->
@@ -27,7 +29,7 @@
 					<td>${s.studentId}</td>
 					<td>${s.studentName}</td>
 					<td>
-						<a href="${pageContext.request.contextPath}/employee/student/removeStudent?studentNo=${s.studentNo}">삭제</a>
+						<a href="${pageContext.request.contextPath}/employee/student/removeStudent?studentNo=${s.studentNo}"><i class="bi bi-x-square" style="color: red;"></i></a>
 					</td> 
 				</tr>
 			</c:forEach>
@@ -37,7 +39,7 @@
 			<form action="${pageContext.request.contextPath}/employee/student/studentList" method="get">
 				<div class="input-group mb-4">
 					<input type="text" class="form-control" placeholder="검색어를 입력하세요!" aria-label="Recipient's username" aria-describedby="button-addon2" name="searchWord">
-					<button class="btn btn-primary" type="submit" id="button-addon2">Button</button>
+					<button class="btn btn-primary" type="submit" id="button-addon2">검색하기</button>
 				</div>
 			</form>
 		</div>
