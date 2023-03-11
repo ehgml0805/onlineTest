@@ -20,6 +20,8 @@ public class TeacherController {
 	@Autowired TeacherService teacherService;
 	@Autowired IdService idService;
 	
+	
+	
 	//강사가 pw수정
 	@PostMapping("/teacher/modifyTeacherPw")
 	public String modifyTeacherPw(HttpSession session

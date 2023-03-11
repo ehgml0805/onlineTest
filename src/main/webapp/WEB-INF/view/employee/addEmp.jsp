@@ -28,7 +28,7 @@
 				</div>
 				
 				<div class="card-body">
-					<form method="post" action="${pageContext.request.contextPath}/employee/teacher/addEmp" id="addForm">
+					<form method="post" action="${pageContext.request.contextPath}/employee/addEmp" id="addForm" >
 						<div class="form-group row">
 							<label for="staticEmail" class="col-sm-2 col-form-label">empId</label>
 							<div class="col-sm-10">

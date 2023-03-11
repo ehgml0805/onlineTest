@@ -33,19 +33,19 @@
 						<div class="form-group row">
 							<label for="staticEmail" class="col-sm-2 col-form-label">StudentId</label>
 							<div class="col-sm-10">
-								<input type="text" name="StudentId" id="StudentId" readonly="readonly" class="form-control">
+								<input type="text" name="studentId" id="studentId" readonly="readonly" class="form-control">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="staticEmail" class="col-sm-2 col-form-label">StudentPw</label>
 							<div class="col-sm-10">
-								<input type="text" name="StudentPw" id="StudentPw" class="form-control">
+								<input type="text" name="studentPw" id="studentPw" class="form-control">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="staticEmail" class="col-sm-2 col-form-label">StudentName</label>
 							<div class="col-sm-10">
-								<input type="text" name="StudentName" id="StudentName" class="form-control">
+								<input type="text" name="studentName" id="studentName" class="form-control">
 							</div>
 						</div>
 						<hr>
@@ -60,11 +60,11 @@
 	
 <script>
 $('#ckBt').click(function(){
-	console.log('중복확인 클릭');
+	console.log('클릭');
 	$.ajax({
 		url:'idck'
 		, type:'get'
-		, data : {studentId:$('#id').val()}
+		, data : {studentId :$('#id').val()}
 		, success:function(model){ // model : 'YES' / 'NO'
 			if(model=='YES') {
 				// 사용가능한 아이디
@@ -76,7 +76,6 @@ $('#ckBt').click(function(){
 		}
 	});
 });
-
 $('#addBt').click(function() {
 	// 폼 유효성 검사
 	// 폼 액션 전송

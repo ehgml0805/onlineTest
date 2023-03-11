@@ -15,7 +15,7 @@
 	<insert id="insertTeacher" parameterType="goodee.gdj58.online.vo.Teacher">
 		
 		INSERT INTO teacher (
-			teachert_id
+			teacher_id
 			, teacher_pw
 			, teacher_name
 		) VALUES (

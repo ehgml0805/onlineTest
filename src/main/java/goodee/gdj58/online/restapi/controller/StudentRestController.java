@@ -12,7 +12,7 @@ public class StudentRestController {
 	@Autowired StudentRestService studentRestService;
 	
 	@GetMapping("/employee/student/idck")
-	public String idck(@RequestParam(value = "studentId")String studentId) {
+	public String idck(@RequestParam(value = "studentId") String studentId) {
 		return studentRestService.getStudentId(studentId);
 	}
 }
