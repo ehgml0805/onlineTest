@@ -13,9 +13,9 @@ public interface QuestionMapper {
 	//문제 상세보기
 	List<Map<String, Object>> questionOne(int questionNo);
 	//문제 삭제
-	int deleteQuestion(int questionNo,int teacherNo);
+	int deleteQuestion(int questionNo);
 	//시험추가
 	int insertQuestion(Question question);
 	//testone에서 문제 리스트 List<Map<String, Object>>: 키값이 아닌, 데이터를 이용한 정렬
-	List<Map<String, Object>> testByQList(int testNo);
+	List<Map<String, Object>> testByQEList(int testNo);
 }

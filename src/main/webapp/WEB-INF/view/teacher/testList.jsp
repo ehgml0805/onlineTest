@@ -11,6 +11,7 @@
 		crossorigin="anonymous">
 	<!-- 아이콘 -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+	
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 </head>
 <body>
@@ -39,15 +40,15 @@
 	
 							<div class="mb-3">
 								<label for="recipient-name" class="col-form-label">시험명</label>
-								<input type="text" name="testTitle" class="form-control" id="testTitle">
+								<input type="text" name="testTitle" class="form-control" id="AtestTitle">
 							</div>
 							<div class="mb-3">
 								<label for="message-text" class="col-form-label">시험 종료일</label>
-								<input type="date" name="testEndDate" class="form-control" id="testEndDate">
+								<input type="date" name="testEndDate" class="form-control" id="AtestEndDate">
 							</div>
 							<div class="mb-3">
 								<label for="message-text" class="col-form-label">TeacherNo</label>
-								<input type="text" name="TeacherNo" class="form-control" id="teacherNo" value="${teacherNo}" readonly="readonly">
+								<input type="text" name="TeacherNo" class="form-control" id="AteacherNo" value="${teacherNo}" readonly="readonly">
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
@@ -79,50 +80,59 @@
 					<td>${t.teacherId}</td>
 					<td>${t.testDate}</td>
 					<td>${t.endDate}</td>
-					<td>
-						<a data-bs-toggle="modal" data-bs-target="#testModefyModal" 
-						href="${pageContext.request.contextPath}/teacher/modifyTest?testNo=${t.testNo}&teacherNo=${t.teacherNo}"><i class="bi bi-pencil-square"></i></a>
-					</td>
-					<td>
-						<a href="${pageContext.request.contextPath}/teacher/removeTest?testNo=${t.testNo}"><i class="bi bi-x-square" style="color: red;"></i></a>
-					</td>
+					<!-- 시험글 쓴 선생님NO와 로그인한 선생님No가 같을 경우만 삭제 수정 가능 -->
+					<c:if test="${t.teacherNo==loginTeacher.teacherNo}">
+						<td>
+							<a data-bs-toggle="modal" data-bs-target="#testModefyModal" 
+							href="${pageContext.request.contextPath}/teacher/modifyTest?testNo=${t.testNo}&teacherNo=${t.teacherNo}"><i class="bi bi-pencil-square"></i></a>
+						</td>
+						<td>
+							<a href="${pageContext.request.contextPath}/teacher/removeTest?testNo=${t.testNo}"><i class="bi bi-x-square" style="color: red;"></i></a>
+						</td>
+					</c:if>
+					<!-- 다를 경우 권한 없음 얼럿창 띄워주기 -->
+					<c:if test="${t.teacherNo!=loginTeacher.teacherNo}">
+						<td>
+							<a href="#"><p onclick="alert('권한이 없습니다. 담당자만 수정이 가능합니다.')"><i class="bi bi-pencil-square"></i></p></a>
+						</td>
+						<td>
+							<a href="#"><p onclick="alert('권한이 없습니다. 담당자만 삭제가 가능합니다.')"><i class="bi bi-x-square" style="color: red;"></i></p></a>
+						</td>
+					</c:if>
 				</tr>
 			</c:forEach>
 		</table>
-		
 		<!-- 시험 수정 모달 내부 -->
-		<div class="modal fade" id="testModefyModal" tabindex="-1"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="testModefyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">시험 수정하기</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
 						<form action="${pageContext.request.contextPath}/teacher/modefyTest" method="post" id="UBF">
 							<div class="mb-3">
 								<label for="recipient-name" class="col-form-label">시험 번호</label>
-								<input type="text" class="form-control" id="testNo" name="testNo"/>
+								<input type="text" class="form-control" id="MtestNo" name="testNo"/>
 							</div>
 	
 							<div class="mb-3">
 								<label for="recipient-name" class="col-form-label">시험명</label>
-								<input type="text" class="form-control" id="testTitle" name="testTitle">
+								<input type="text" class="form-control" id="MtestTitle" name="testTitle"/>
 							</div>
 							<div class="mb-3">
 								<label for="message-text" class="col-form-label">시험 종료일</label>
-								<input type="date" name="testEndDate" class="form-control" id="testEndDate">
+								<input type="date" class="form-control" id="MtestEndDate" name="testEndDate"/>
 							</div>
 							<div class="mb-3">
 								<label for="message-text" class="col-form-label">TeacherNo</label>
-								<input type="text" class="form-control" id="teacherNo" value="${teacherNo}" name="teacherNo" readonly="readonly">
+								<input type="text" class="form-control" value="${teacherNo}" name="teacherNo" readonly="readonly">
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-								<button type="button" class="btn btn-primary" id="UBT">수정</button>
+								<button type="button" class="btn btn-primary" id="UBT" name="UBT">수정</button>
 							</div>
 						</form>
 					</div>
@@ -173,45 +183,49 @@
 	<!-- 모달 자바스크립트 코드 -->
 	<script>
 		// 시험추가
-		const modalEl = document.querySelector('#testModal')
-		const testInputEl = document.querySelector('#testTitle')
+		var  modalEl = document.querySelector('#testModal')
+		var  testInputEl = document.querySelector('#testTitle')
 	
 		modalEl.addEventListener('shown.bs.modal', function () {
 			testInputEl.focus()
 		})
 		//시험 수정
-		const modalTl = document.querySelector('#testModefyModal')
-		const testNoInputEl = document.querySelector('#inputValue')
+		var  modalTl = document.querySelector('#testModefyModal')
+		var  testNoInputEl = document.querySelector('#MtestNo')
+		
+		modalTl.addEventListener('shown.bs.modal', function () {
+			testNoInputEl.focus()
+		})
 		
 		//시험 추가 폼 유효성 검사
 		$('#ADB').click(function() {
 		// 폼 액션 전송
 		console.log('시험 추가 클릭');
-		if($('#testTitle').val()==""){
+		if($('#AtestTitle').val()==""){
 			alert('시험 제목을 입력해주세요!');
 			return false;
 		}
-		if($('#testEndDate').val()==""){
+		if($('#AtestEndDate').val()==""){
 			alert('시험 종료일을 입력해주세요!');
 			return false;
 		}
 		
-		$('#UBF').submit();
+		$('#ADF').submit();
 	});
 		
 		//시험 수정 폼 유효성 검사
 		$('#UBT').click(function() {
 		// 폼 액션 전송
 		console.log('시험 수정 클릭');
-		if($('#testNo').val()==""){
+		if($('#MtestNo').val()==""){
 			alert('시험 번호를 입력해주세요!');
 			return false;
 		}
-		if($('#testTitle').val()==""){
+		if($('#MtestTitle').val()==""){
 			alert('시험 제목을 입력해주세요!');
 			return false;
 		}
-		if($('#testEndDate').val()==""){
+		if($('#MtestEndDate').val()==""){
 			alert('시험 종료일을 입력해주세요!');
 			return false;
 		}
@@ -219,9 +233,5 @@
 		$('#UBF').submit();
 	});
 	</script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-		crossorigin="anonymous"></script>
 </body>
 </html>

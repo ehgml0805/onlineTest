@@ -66,22 +66,20 @@ public class QuestionController {
 			 e.setExampleIdx(exampleIdx[i]);
 			 e.setExampleTitle(exampleTitle[i]);
 			 e.setAnswerOx(answerOx[i]);
-			 row = exampleService.modifyExample(e)+row;
+			 row += exampleService.modifyExample(e);
 	        }
 		if(row!=4) {
-			log.debug("\u001B[46m"+"시험 수정 실패!");
+			log.debug("시험 수정 실패!");
 			return "redirect:/teacher/testOne?testNo="+testNo+"";
 		}
-		log.debug("\u001B[46m"+"시험 수정 성공");
+		log.debug("시험 수정 성공");
 		return "redirect:/teacher/testOne?testNo="+testNo+"";
 	}
 	
 	//시험 문제 삭제
 	@GetMapping("teacher/removeQuestion")
 	public String removeQuestion(HttpSession session, @RequestParam("questionNo") int questionNo, int testNo ) {
-		Teacher loginTeacher = (Teacher)session.getAttribute("loginTeacher");
-		int teacherNo=loginTeacher.getTeacherNo();
-		questionService.removeQuestion(questionNo, teacherNo);
+		questionService.removeQuestion(questionNo);
 		
 		return "redirect:/teacher/testOne?testNo="+testNo+"";
 	}
@@ -103,7 +101,7 @@ public class QuestionController {
 			 e.setExampleIdx(exampleIdx[i]);
 			 e.setExampleTitle(exampleTitle[i]);
 			 e.setAnswerOx(answerOx[i]);
-			 row = exampleService.addExample(e)+row;
+			 row += exampleService.addExample(e);
 	        }
 		if(row!=4) {
 			System.out.println("시험 입력 실패!");

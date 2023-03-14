@@ -11,7 +11,7 @@
 	<update id="updateTest" parameterType="java.util.Map">
 		
 		UPDATE test
-		SET test_title= #{testTitle}
+		SET test_title= #{testTitle}, test_end_date= #{testEndDate}
 		WHERE test_no=#{testNo} AND teacher_no=#{teacherNo}
 	
 	</update>
@@ -22,7 +22,22 @@
 
 		SELECT test_no testNo, test_title testTitle, test_date testDate, teacher_no teacherNo
 		FROM test
-		WHERE test_no=#{testNo}
+		WHERE test_no=#{testNo} 
+		
+		<!-- SELECT
+		t.test_title testTitle
+		, q.question_no qNo
+		, q.test_no testNo
+		, q.question_no qNo
+		, q.question_idx qIdx
+		, q.question_title qTitle
+		, e.example_idx eIdx
+		, e.example_title eTitle
+		, e.answer_ox eOx
+		FROM question q
+		INNER JOIN example e ON q.question_no = e.question_no
+		INNER JOIN test t ON t.test_no = q.test_no
+		WHERE q.test_no = #{testNo} -->
 		
 	</select>
 	
@@ -73,6 +88,7 @@
 			, t.test_title testTitle
 			, t.test_date testDate
 			, t.test_end_date endDate
+			, t.teacher_no teacherNo
 			, tc.teacher_id teacherId
 		FROM test t INNER JOIN teacher tc ON t.teacher_no=tc.teacher_no
 		<where>

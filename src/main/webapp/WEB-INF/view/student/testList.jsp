@@ -25,9 +25,17 @@
 				<tr>
 					<td>${st.testTitle}</td>
 					<td>${st.teacherName}</td>
-					<td>
-						<a href="${pageContext.request.contextPath}/student/testOne?testNo=${t.testNo}">응시하기</a>
-					</td>
+					<!-- 오늘 날짜가 시험 종료일보다 작거나 같을 때만 응시가능 -->
+					<c:if test="${nowTime1 <= st.endDate}">
+						<td>
+							<a href="${pageContext.request.contextPath}/student/testOne?testNo=${t.testNo}">응시하기</a>
+						</td>
+					</c:if>
+					<c:if test="${nowTime1 > st.endDate}">
+						<td style="color: red;">
+							시험 종료
+						</td>
+					</c:if>
 					<td>${st.endDate} </td>
 				</tr>
 			</c:forEach>

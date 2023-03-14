@@ -52,7 +52,7 @@
 			, e.answer_ox eOX
 		FROM question q 
 		INNER JOIN example e ON q.question_no= e.question_no
-		WHERE q.question_idx=#{questionIdx}
+		WHERE q.question_no=#{questionNo}
 		ORDER BY example_idx ASC
 
 	</select>

@@ -11,7 +11,7 @@
 	
 	</update>
 	
-	<!-- 시험 상세보기 -->
+	<!-- 시험 수정시에 시험 상세보기 -->
 	<select id="questionOne" parameterType="int" resultType="java.util.Map">
 	
 		SELECT 
@@ -32,13 +32,15 @@
 	<delete id="deleteQuestion" parameterType="int">
 			
 		DELETE FROM question 
-		WHERE question_no = #{questionNo} AND teacher_no=#{teacherNo}
+		WHERE question_no = #{questionNo}
 	
 	</delete>
 	
 	<!-- 문제 추가 -->
-	<insert id="insertQuestion" parameterType="goodee.gdj58.online.vo.Question">
-			
+	<insert id="insertQuestion" parameterType="goodee.gdj58.online.vo.Question" useGeneratedKeys="true" keyProperty="questionNo" keyColumn="questionNo">
+		<!-- useGeneratedKeys : 자동 생성키값 반환 여부를 지정합니다. (default: false)
+			 keyColumn : PK로 지정할 테이블 컬럼명을 지정합니다.
+			 keyProperty : 반환된 값을 매핑 할 변수명을 지정합니다. -->
 		INSERT INTO question
 			( test_no, question_idx , question_title)
 		VALUES
@@ -47,19 +49,24 @@
 	</insert>
 	
 	<!-- 문제 리스트 -->
-	<select id="testByQList" resultType="java.util.Map" parameterType="int">
+	<select id="testByQEList" resultType="java.util.Map" parameterType="int">
 		<!-- resultType : 조회 결과 값을 저장하기 위한 데이터 타입(데이터 하나에 대한 타입 지정)
 			 paramterType : 전달받은 파라이터 데이터 타입 지정(선택적)-->
-		SELECT 
-			t.test_no testNo
-			, t.test_title testTitle
-			, t.test_date testDate
-			, q.question_no qNo
-			, q.question_idx qIdx
-			, q.question_title qTitle
-		FROM question q 
-		INNER JOIN test t ON q.test_no=t.test_no 
-		WHERE t.test_no=#{testNo}
+		SELECT
+		t.test_title testTitle
+		, q.question_no qNo
+		, q.test_no testNo
+		, q.question_no qNo
+		, q.question_idx qIdx
+		, q.question_title qTitle
+		, e.example_idx eIdx
+		, e.example_title eTitle
+		, e.answer_ox eOx
+		FROM question q
+		INNER JOIN example e ON q.question_no = e.question_no
+		INNER JOIN test t ON t.test_no = q.test_no
+		WHERE q.test_no = #{testNo}
+		ORDER BY q.question_idx ASC, e.example_idx ASC
 	</select>
 
 </mapper>

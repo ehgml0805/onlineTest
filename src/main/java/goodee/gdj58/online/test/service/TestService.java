@@ -24,11 +24,12 @@ public class TestService {
 	}
 	
 	//test 수정
-	public int modefyTest(int testNo, int teacherNo ,String testTitle) {
+	public int modefyTest(int testNo, int teacherNo ,String testTitle, String testEndDate) {
 		Map<String, Object> paramMap=new HashMap<String, Object>();
 		paramMap.put("testNo", testNo);
 		paramMap.put("teacherNo", teacherNo);
 		paramMap.put("testTitle", testTitle);
+		paramMap.put("testEndDate", testEndDate);
 		return testMapper.updateTest(paramMap);
 	}
 

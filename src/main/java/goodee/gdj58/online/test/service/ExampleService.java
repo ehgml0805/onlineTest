@@ -34,7 +34,7 @@ public class ExampleService {
 	}
 	
 	//해당 테스트의 문제의 보기
-	public List<Map<String, Object>> getTestEList(int questionIdx){
-		return exampleMapper.testByEList(questionIdx);
+	public List<Example> getTestEList(int questionNo){
+		return exampleMapper.testByEList(questionNo);
 	}
 }

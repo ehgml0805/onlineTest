@@ -13,184 +13,182 @@
 </head>
 
 <body>
-	<div class="container">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
-				
-			<div class="container-fluid">
-				<a class="navbar-brand" href="#"></a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-					aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-					<div class="navbar-nav">
-						<a class="nav-link active" aria-current="page" href="#">${loginStudent.studentName}</a> 
-						<!-- 로그인 안되어 있으면  -->
-						<c:if test="${loginStudent == null}">
-							<!-- 로그인 모달 버튼 -->
-							<a class="nav-link" href="loginModal" data-bs-toggle="modal" data-bs-target="#EmpLoginModal">관리자로그인</a>
-							
-							<!-- 로그인 모달 내부 -->
-							<div class="modal fade" id="EmpLoginModal" tabindex="-1" aria-labelledby="empModalLabel" aria-hidden="true">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
+			
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#"></a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+				aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-link active" aria-current="page" href="#">${loginStudent.studentName}</a> 
+					<!-- 로그인 안되어 있으면  -->
+					<c:if test="${loginStudent == null}">
+						<!-- 로그인 모달 버튼 -->
+						<a class="nav-link" href="loginModal" data-bs-toggle="modal" data-bs-target="#EmpLoginModal">관리자로그인</a>
 						
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="empLoginModalLabel">관리자 로그인</h5>
-											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<form action="${pageContext.request.contextPath}/loginEmp" method="post" id="eloginForm">
-						
-												<div class="mb-3">
-													<label for="recipient-name" class="col-form-label">관리자 ID</label>
-													<input type="text" name="empId" id="empId" class="form-control" placeholder="아이디를 입력하세요.">
-												</div>
-												<div class="mb-3">
-													<label for="message-text" class="col-form-label">관리자 PW</label>
-													<input type="password" name="empPw" id="empPw" class="form-control" placeholder="비밀번호를 입력하세요.">
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-													<button type="button" class="btn btn-primary" id="eloginBt">관리자 로그인</button>
-												</div>
-											</form>
-										</div>
+						<!-- 로그인 모달 내부 -->
+						<div class="modal fade" id="EmpLoginModal" tabindex="-1" aria-labelledby="empModalLabel" aria-hidden="true">
+					
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="empLoginModalLabel">관리자 로그인</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<form action="${pageContext.request.contextPath}/loginEmp" method="post" id="eloginForm">
+					
+											<div class="mb-3">
+												<label for="recipient-name" class="col-form-label">관리자 ID</label>
+												<input type="text" name="empId" id="empId" class="form-control" placeholder="아이디를 입력하세요." value="admin">
+											</div>
+											<div class="mb-3">
+												<label for="message-text" class="col-form-label">관리자 PW</label>
+												<input type="password" name="empPw" id="empPw" class="form-control" placeholder="비밀번호를 입력하세요." value="1234">
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+												<button type="button" class="btn btn-primary" id="eloginBt">관리자 로그인</button>
+											</div>
+										</form>
 									</div>
 								</div>
 							</div>
-							
-							<!-- 강사 로그인 -->
-							<a class="nav-link" href="loginModal" data-bs-toggle="modal" data-bs-target="#TLoginModal">강사로그인</a>
-							
-							<!-- 로그인 모달 내부 -->
-							<div class="modal fade" id="TLoginModal" tabindex="-1" aria-labelledby="TModalLabel" aria-hidden="true">
+						</div>
 						
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="TLoginModalLabel">강사 로그인</h5>
-											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<form action="${pageContext.request.contextPath}/loginTeacher" method="post" id="tloginForm">
+						<!-- 강사 로그인 -->
+						<a class="nav-link" href="loginModal" data-bs-toggle="modal" data-bs-target="#TLoginModal">강사로그인</a>
 						
-												<div class="mb-3">
-													<label for="recipient-name" class="col-form-label">강사 ID</label>
-													<input type="text" name="teacherId" id="teacherId" class="form-control" placeholder="아이디를 입력하세요.">
-												</div>
-												<div class="mb-3">
-													<label for="message-text" class="col-form-label">강사 PW</label>
-													<input type="password" name="teacherPw" id="teacherPw" class="form-control" placeholder="비밀번호를 입력하세요.">
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-													<button type="button" class="btn btn-primary" id="tloginBt">강사 로그인</button>
-												</div>
-											</form>
-										</div>
+						<!-- 로그인 모달 내부 -->
+						<div class="modal fade" id="TLoginModal" tabindex="-1" aria-labelledby="TModalLabel" aria-hidden="true">
+					
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="TLoginModalLabel">강사 로그인</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<form action="${pageContext.request.contextPath}/loginTeacher" method="post" id="tloginForm">
+					
+											<div class="mb-3">
+												<label for="recipient-name" class="col-form-label">강사 ID</label>
+												<input type="text" name="teacherId" id="teacherId" class="form-control" placeholder="아이디를 입력하세요." value="t1">
+											</div>
+											<div class="mb-3">
+												<label for="message-text" class="col-form-label">강사 PW</label>
+												<input type="password" name="teacherPw" id="teacherPw" class="form-control" placeholder="비밀번호를 입력하세요." value="1111">
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+												<button type="button" class="btn btn-primary" id="tloginBt">강사 로그인</button>
+											</div>
+										</form>
 									</div>
 								</div>
 							</div>
-							<!-- 학생 로그인 -->
-							<a class="nav-link" href="loginModal" data-bs-toggle="modal" data-bs-target="#SLoginModal">학생로그인</a>
-							
-							<!-- 로그인 모달 내부 -->
-							<div class="modal fade" id="SLoginModal" tabindex="-1" aria-labelledby="SModalLabel" aria-hidden="true">
+						</div>
+						<!-- 학생 로그인 -->
+						<a class="nav-link" href="loginModal" data-bs-toggle="modal" data-bs-target="#SLoginModal">학생로그인</a>
 						
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="SLoginModalLabel">학생 로그인</h5>
-											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<form action="${pageContext.request.contextPath}/loginStudent" method="post" id="sloginForm">
-						
-												<div class="mb-3">
-													<label for="recipient-name" class="col-form-label">학생 ID</label>
-													<input type="text" name="studentId" id="studentId" class="form-control" placeholder="아이디를 입력하세요.">
-												</div>
-												<div class="mb-3">
-													<label for="message-text" class="col-form-label">학생 PW</label>
-													<input type="password" name="studentPw" id="studentPw" class="form-control" placeholder="비밀번호를 입력하세요.">
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-													<button type="button" class="btn btn-primary" id="sloginBt">학생 로그인</button>
-												</div>
-											</form>
-										</div>
+						<!-- 로그인 모달 내부 -->
+						<div class="modal fade" id="SLoginModal" tabindex="-1" aria-labelledby="SModalLabel" aria-hidden="true">
+					
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="SLoginModalLabel">학생 로그인</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<form action="${pageContext.request.contextPath}/loginStudent" method="post" id="sloginForm">
+					
+											<div class="mb-3">
+												<label for="recipient-name" class="col-form-label">학생 ID</label>
+												<input type="text" name="studentId" id="studentId" class="form-control" placeholder="아이디를 입력하세요." value="s1">
+											</div>
+											<div class="mb-3">
+												<label for="message-text" class="col-form-label">학생 PW</label>
+												<input type="password" name="studentPw" id="studentPw" class="form-control" placeholder="비밀번호를 입력하세요." value="1234">
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+												<button type="button" class="btn btn-primary" id="sloginBt">학생 로그인</button>
+											</div>
+										</form>
 									</div>
 								</div>
 							</div>
-						</c:if>
+						</div>
+					</c:if>
+					
+					
+					<!-- 관리자 로그인시 보여줄 화면 -->
+					<c:if test="${loginStudent != null}">
+						<!--
+							시험 보기 들어오면 봐야할 시험이랑 봤었던 시험 볼 예정인 시험 나누고 점수까지
+							각 리스트 별 점수랑 시험 응시 버튼 누르면 시험봐야대(question JOIN example ) 그러고 답안지 확인 후 제출 까지(paper) 
+							문자랑 보기 그룹콘캣+INNER JOIN 
+						-->
+						<a class="nav-link" href="${pageContext.request.contextPath}/student/testList">시험보기</a>
+						<!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
 						
+						<!-- 비밀번호 수정 모달 버튼 -->
+						<a class="nav-link" href="loginModal" data-bs-toggle="modal" data-bs-target="#pwModifyModal">비밀번호수정</a>
 						
-						<!-- 관리자 로그인시 보여줄 화면 -->
-						<c:if test="${loginStudent != null}">
-							<!--
-								시험 보기 들어오면 봐야할 시험이랑 봤었던 시험 볼 예정인 시험 나누고 점수까지
-								각 리스트 별 점수랑 시험 응시 버튼 누르면 시험봐야대(question JOIN example ) 그러고 답안지 확인 후 제출 까지(paper) 
-								문자랑 보기 그룹콘캣+INNER JOIN 
-							-->
-							<a class="nav-link" href="${pageContext.request.contextPath}/student/testList">시험보기</a>
-							<!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
-							
-							<!-- 비밀번호 수정 모달 버튼 -->
-							<a class="nav-link" href="loginModal" data-bs-toggle="modal" data-bs-target="#pwModifyModal">비밀번호수정</a>
-							
-							<!-- 비밀버호 수정 모달 내부 -->
-							<div class="modal fade" id="pwModifyModal" tabindex="-1" aria-labelledby="pwModifyLabel" aria-hidden="true">
-						
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="pwModifyModalLabel">${loginStudent.studentName}님 비밀번호 수정</h5>
-											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<form action="${pageContext.request.contextPath}/student/modifyStudentPw" method="post" id="modifyForm">
-						
-												<div class="mb-3">
-													<label for="recipient-name" class="col-form-label">기존 비밀번호</label>
-													<input type="password" name="oldPw" id="oldPw" class="form-control" placeholder="기존 비밀번호를 입력하세요.">
-												</div>
-												<div class="mb-3">
-													<label for="message-text" class="col-form-label">신규 비밀번호</label>
-													<input type="password" name="newPwCk" id="newPwCk" class="form-control" placeholder="신규 비밀번호를 입력하세요.">
-												</div>
-												<div class="mb-3">
-													<label for="message-text" class="col-form-label">신규 비밀번호 확인</label>
-													<input type="password"  name="newPw" id="newPw" class="form-control" placeholder="신규 비밀번호를 다시 입력하세요.">
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-													<button type="button" class="btn btn-primary" id="modifyBt">비밀번호 수정</button>
-												</div>
-											</form>
-										</div>
+						<!-- 비밀버호 수정 모달 내부 -->
+						<div class="modal fade" id="pwModifyModal" tabindex="-1" aria-labelledby="pwModifyLabel" aria-hidden="true">
+					
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="pwModifyModalLabel">${loginStudent.studentName}님 비밀번호 수정</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<form action="${pageContext.request.contextPath}/student/modifyStudentPw" method="post" id="modifyForm">
+					
+											<div class="mb-3">
+												<label for="recipient-name" class="col-form-label">기존 비밀번호</label>
+												<input type="password" name="oldPw" id="oldPw" class="form-control" placeholder="기존 비밀번호를 입력하세요.">
+											</div>
+											<div class="mb-3">
+												<label for="message-text" class="col-form-label">신규 비밀번호</label>
+												<input type="password" name="newPwCk" id="newPwCk" class="form-control" placeholder="신규 비밀번호를 입력하세요.">
+											</div>
+											<div class="mb-3">
+												<label for="message-text" class="col-form-label">신규 비밀번호 확인</label>
+												<input type="password"  name="newPw" id="newPw" class="form-control" placeholder="신규 비밀번호를 다시 입력하세요.">
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+												<button type="button" class="btn btn-primary" id="modifyBt">비밀번호 수정</button>
+											</div>
+										</form>
 									</div>
 								</div>
 							</div>
-							
-						</c:if>
+						</div>
 						
-						<!-- 모두가 가능 -->
-						<c:if test="${loginEmp != null || loginStudent != null || loginTeacher != null }">
-							<a class="nav-link" href="${pageContext.request.contextPath}/student/logout">로그아웃</a>
-						</c:if>
-					</div>
+					</c:if>
+					
+					<!-- 모두가 가능 -->
+					<c:if test="${loginEmp != null || loginStudent != null || loginTeacher != null }">
+						<a class="nav-link" href="${pageContext.request.contextPath}/student/logout">로그아웃</a>
+					</c:if>
 				</div>
 			</div>
-			
-			<form class="d-flex">
-				<input class="form-control me-2" type="search" placeholder="Search"
-					aria-label="Search">
-				<button class="btn btn-outline-success" type="submit">Search</button>
-			</form>
-		</nav>
-	</div>
+		</div>
+		
+		<form class="d-flex">
+			<input class="form-control me-2" type="search" placeholder="Search"
+				aria-label="Search">
+			<button class="btn btn-outline-success" type="submit">Search</button>
+		</form>
+	</nav>
 
 <script>
 	//관리자 로그인

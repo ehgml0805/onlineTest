@@ -39,11 +39,11 @@
 						
 												<div class="mb-3">
 													<label for="recipient-name" class="col-form-label">관리자 ID</label>
-													<input type="text" name="empId" id="empId" class="form-control" placeholder="아이디를 입력하세요.">
+													<input type="text" name="empId" id="empId" class="form-control" placeholder="아이디를 입력하세요." value="admin">
 												</div>
 												<div class="mb-3">
 													<label for="message-text" class="col-form-label">관리자 PW</label>
-													<input type="password" name="empPw" id="empPw" class="form-control" placeholder="비밀번호를 입력하세요.">
+													<input type="password" name="empPw" id="empPw" class="form-control" placeholder="비밀번호를 입력하세요." value="1234">
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
@@ -72,11 +72,11 @@
 						
 												<div class="mb-3">
 													<label for="recipient-name" class="col-form-label">강사 ID</label>
-													<input type="text" name="teacherId" id="teacherId" class="form-control" placeholder="아이디를 입력하세요.">
+													<input type="text" name="teacherId" id="teacherId" class="form-control" placeholder="아이디를 입력하세요." value="t1">
 												</div>
 												<div class="mb-3">
 													<label for="message-text" class="col-form-label">강사 PW</label>
-													<input type="password" name="teacherPw" id="teacherPw" class="form-control" placeholder="비밀번호를 입력하세요.">
+													<input type="password" name="teacherPw" id="teacherPw" class="form-control" placeholder="비밀번호를 입력하세요." value="1111">
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
@@ -104,11 +104,11 @@
 						
 												<div class="mb-3">
 													<label for="recipient-name" class="col-form-label">학생 ID</label>
-													<input type="text" name="studentId" id="studentId" class="form-control" placeholder="아이디를 입력하세요.">
+													<input type="text" name="studentId" id="studentId" class="form-control" placeholder="아이디를 입력하세요." value="s1">
 												</div>
 												<div class="mb-3">
 													<label for="message-text" class="col-form-label">학생 PW</label>
-													<input type="password" name="studentPw" id="studentPw" class="form-control" placeholder="비밀번호를 입력하세요.">
+													<input type="password" name="studentPw" id="studentPw" class="form-control" placeholder="비밀번호를 입력하세요." value="1234">
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
