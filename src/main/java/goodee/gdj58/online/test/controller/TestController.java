@@ -52,6 +52,24 @@ public class TestController {
 		return "redirect:/teacher/testList";
 	}
 
+	// 학생이 tsetOne 상세보기
+	@GetMapping("student/testOne")
+	public String stestOne(HttpSession session, Model model,
+							@RequestParam(value = "testNo") int testNo ) {
+		
+		//테스트 상세보기 
+		List<Map<String, Object>> testOne =testService.getTestOne(testNo); 
+		model.addAttribute("testOne", testOne);
+		
+		List<Map<String, Object>> list = questionService.getTestQEList(testNo);
+		//Test test = teacherService.getTestTitle(testNo); // 테스트 정보
+		//List<Map<String, Object>> answer = teacherService.getTestAnswer(testNo);
+		//model.addAttribute("test",test);
+		model.addAttribute("list",list);
+		//model.addAttribute("answer",answer);
+
+		return "student/testOne";
+	}
 	// 강사가 tsetOne 상세보기
 	@GetMapping("teacher/testOne")
 	public String testOne(HttpSession session, Model model,
@@ -67,10 +85,7 @@ public class TestController {
 		//model.addAttribute("test",test);
 		model.addAttribute("list",list);
 		//model.addAttribute("answer",answer);
-		log.debug("\u001B[31m" + list.size()/4 + "	<= 문제 개수");
-		int questionCount = list.size()/4;
-		model.addAttribute("questionCount", questionCount);
-
+		
 		return "teacher/testOne";
 	}
 

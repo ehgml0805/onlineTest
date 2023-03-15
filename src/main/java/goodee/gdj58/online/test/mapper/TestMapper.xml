@@ -20,7 +20,7 @@
 	<select id="selecTestOne" 
 			parameterType="int" resultType="java.util.Map">
 
-		SELECT test_no testNo, test_title testTitle, test_date testDate, teacher_no teacherNo
+		SELECT test_no testNo, test_title testTitle, test_date testDate,test_end_date testEndDate ,teacher_no teacherNo
 		FROM test
 		WHERE test_no=#{testNo} 
 		
