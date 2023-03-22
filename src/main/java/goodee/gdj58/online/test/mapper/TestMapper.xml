@@ -70,7 +70,8 @@
 			, t.test_date testDate
 			, t.test_end_date endDate
 			, tc.teacher_name teacherName
-		FROM test t INNER JOIN teacher tc ON t.teacher_no=tc.teacher_no
+		FROM test t 
+		INNER JOIN teacher tc ON t.teacher_no=tc.teacher_no
 		<where>
 			<if test="searchWord != null || searchWord != '' ">
 				test_title like CONCAT('%',#{searchWord},'%')

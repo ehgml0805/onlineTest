@@ -19,7 +19,6 @@
 				<th>Teacher</th>
 				<th>시험 응시</th>
 				<th>시험 종료일</th>
-				
 			</tr>
 			<c:forEach var="st" items="${stList}">
 				<tr>
@@ -37,6 +36,7 @@
 						</td>
 					</c:if>
 					<td>${st.endDate} </td>
+					
 				</tr>
 			</c:forEach>
 		</table>
