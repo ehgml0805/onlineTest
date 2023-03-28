@@ -12,10 +12,10 @@
 		<c:import url="/WEB-INF/view/employee/inc/empMenu.jsp"></c:import>
 	</div>
 
-	<!-- 로그인 됨 -->
+	<!-- 로그인 됨 
 	<c:if test="${loginEmp!=null}">
 	${loginEmp.empName} 님 반갑습니다.
-	</c:if>
-
+	</c:if> -->
+	<img src="${pageContext.request.contextPath}/img/3.jpg" style="width: 1300px; height: 770px;">
 </body>
 </html>

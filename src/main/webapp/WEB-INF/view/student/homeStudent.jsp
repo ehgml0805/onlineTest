@@ -12,10 +12,11 @@
 	<div>
 		<c:import url="/WEB-INF/view/student/inc/studentMenu.jsp"></c:import>
 	</div>
-	<!-- 로그인 됨 -->
+	<!-- 로그인 됨 
 	<c:if test="${loginStudent!=null}">
 	${loginStudent.studentName} 님 반갑습니다.
-	</c:if>
+	</c:if> -->
+	<img src="${pageContext.request.contextPath}/img/2.svg" style="width: 1300px; height: 770px;">
 	
 </body>
 </html>

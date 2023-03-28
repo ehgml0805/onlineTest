@@ -12,11 +12,11 @@
 		<c:import url="/WEB-INF/view/teacher/inc/teacherMenu.jsp"></c:import>
 	</div>
 	<!-- 강사 -->
-	<!-- 로그인 됨 -->
+	<!-- 로그인 됨 
 	<c:if test="${loginTeacher!=null}">
 		${loginTeacher.teacherName} 님 반갑습니다.
-	</c:if>
-	<img src="resources/img/t-home.jpg">
+	</c:if> -->
+	<img src="${pageContext.request.contextPath}/img/1.jpg">
 
 
 </body>
